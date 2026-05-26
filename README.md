@@ -1,13 +1,13 @@
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mclemente/fvtt-condition-lab-triggler)
-![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/mclemente/fvtt-condition-lab-triggler/latest/module.zip)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/strongpauly/fvtt-condition-lab)
+![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/strongpauly/fvtt-condition-lab/latest/module.zip)
 
-# Condition Lab & Triggler
+# Condition Lab
 
 ---
 
-**[📚Wiki/How-To](https://github.com/mclemente/fvtt-condition-lab-triggler/wiki)**
-**[🐛Issues/Bugs](https://github.com/mclemente/fvtt-condition-lab-triggler/issues)**
-**[📜Changelog](https://github.com/mclemente/fvtt-condition-lab-triggler/blob/master/CHANGELOG.md)**
+**[📚Wiki/How-To](https://github.com/strongpauly/fvtt-condition-lab/wiki)**
+**[🐛Issues/Bugs](https://github.com/strongpauly/fvtt-condition-lab/issues)**
+**[📜Changelog](https://github.com/strongpauly/fvtt-condition-lab/blob/master/CHANGELOG.md)**
 **[🛠 Features](#features)**
 **[👏Thanks](#thanks)**
 **[❗Attribution](#attribution)**
@@ -31,14 +31,6 @@ This feature allows you to create your own status effects and link them to refer
 
 </details>
 
-## Triggler
-
-<details>
-  <summary>Click to show</summary>
-
-Trigger the addition or removal of Conditions, and/or the execution of Macros based on changes to actor/token properties such as HP
-
-</details>
 
 ---
 
@@ -47,6 +39,8 @@ Trigger the addition or removal of Conditions, and/or the execution of Macros ba
 Thanks to everyone that supports this project.
 
 Thanks to everyone that supported the original project. You can see who on [CUB's contributors](https://github.com/death-save/combat-utility-belt#contributors-).
+
+Thanks to everyone that supported the forked project. You can see who on [CLT's contributors](https://github.com/mclemente/fvtt-condition-lab/graphs/contributors).
 
 The original project acknowledged that many of the functions found in the Combat Utility Belt are inspired by [Roll20 API scripts](https://github.com/RobinKuiper/Roll20APIScripts) written by @RobinKuiper.
 

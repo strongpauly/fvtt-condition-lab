@@ -70,24 +70,9 @@ a.add-temporary {
 /*                 CONDITION LAB                */
 /* -------------------------------------------- */
 
-#cub-condition-lab,
-#cub-triggler-form {
+#cub-condition-lab{
 	min-height: 510px;
 	min-width: 640px;
-}
-
-#cub-triggler-form {
-	min-height: 325px;
-}
-
-#cub-triggler-form .triggler-body {
-	overflow: hidden auto;
-	margin: 0;
-	padding: 1rem 1rem 0;
-}
-
-#cub-triggler-form fieldset legend {
-	font-size: 1.25em;
 }
 
 #cub-condition-lab .hidden {
@@ -139,12 +124,10 @@ a.add-temporary {
 	padding: 0px;
 }
 
-.triggler-form .window-content,
 .condition-lab-form .window-content {
 	padding: 0;
 }
 
-.triggler-form form,
 .condition-lab-form form {
 	height: 100%;
 }
@@ -232,7 +215,6 @@ a.add-temporary {
 	flex: 0;
 }
 
-.triggler-form footer,
 .condition-lab footer {
 	margin: 1rem;
     flex: 0;
@@ -335,61 +317,41 @@ a.add-temporary {
 	justify-content: start;
 }
 
-.triggler-icon {
-	display: inline-flex;
-}
-
 #cub-condition-lab .flex-break {
 	flex-basis: 100%;
 	height: 0;
 }
 
-/* TRIGGLER */
-
-.triggler a.delete {
-	flex: 0 0 16px;
-	margin: 2px 0px 0px 3px;
-}
-
-.triggler .form-group.options {
-	flex: 0 0 auto;
-	margin: 2px 5px 2px 0px;
-}
-
-#cub-triggler-form .advanced-trigger-operator {
-	flex: 0;
-}
-
-#settings div#condition-lab-triggler {
+#settings div#condition-lab {
 	margin: 0;
 }
 
 /* ABOUT */
-#condition-lab-triggler-about img {
+#condition-lab-about img {
 	border: none;
 }
 
-#condition-lab-triggler-about .logo {
+#condition-lab-about .logo {
 	width: 600px;
 }
 
-#condition-lab-triggler-about .version {
+#condition-lab-about .version {
 	flex-grow: 0;
 }
 
-#condition-lab-triggler-about .readme {
+#condition-lab-about .readme {
 	text-align: center;
 }
 
-#condition-lab-triggler-about a {
+#condition-lab-about a {
 	text-shadow: 1px 1px black;
 }
 
-#condition-lab-triggler-about div.patrons {
+#condition-lab-about div.patrons {
 	width: 100%;
 }
 
-#condition-lab-triggler-about .patrons ol {
+#condition-lab-about .patrons ol {
 	height: 175px;
 	border: 1px inset white;
 	list-style: none;
@@ -398,27 +360,27 @@ a.add-temporary {
 	padding: 2px;
 }
 
-#condition-lab-triggler-about .patrons li:nth-child(odd) {
+#condition-lab-about .patrons li:nth-child(odd) {
 	background: rgba(0, 0, 0, 0.2);
 }
 
-#condition-lab-triggler-about .patrons li {
+#condition-lab-about .patrons li {
 	font-size: x-large;
 }
 
-#condition-lab-triggler-about footer div {
+#condition-lab-about footer div {
 	justify-content: center;
 	text-align: center;
 }
 
-#condition-lab-triggler-about .death-save {
+#condition-lab-about .death-save {
 	flex: 0 0 120px;
 }
 
-#condition-lab-triggler-about .heart {
+#condition-lab-about .heart {
 	color: tomato;
 }
 
-#condition-lab-triggler-about .patreon img {
+#condition-lab-about .patreon img {
 	flex: 0 0 100px;
 }

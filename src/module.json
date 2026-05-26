@@ -1,18 +1,23 @@
 {
-	"id": "condition-lab-triggler",
-	"name": "condition-lab-triggler",
-	"title": "Condition Lab & Triggler",
-	"description": "Adds various combat-focused features",
+	"id": "condition-lab",
+	"name": "condition-lab",
+	"title": "Condition Lab",
+	"description": "Adds the ability to create custom condtions for foundry",
 	"authors": [
 		{
 			"name": "Matheus Clemente",
 			"url": "https://github.com/mclemente",
 			"discord": "mclemente"
+		},
+		{
+			"name": "strongpauly",
+			"url": "https://github.com/strongpauly",
+			"discord": "strongpauly"
 		}
 	],
-	"bugs": "https://github.com/mclemente/fvtt-condition-lab-triggler/issues",
-	"readme": "https://github.com/mclemente/fvtt-condition-lab-triggler/wiki",
-	"esmodules": ["module/condition-lab-triggler.js"],
+	"bugs": "https://github.com/strongpauly/fvtt-condition-lab/issues",
+	"readme": "https://github.com/strongpauly/fvtt-condition-lab/blob/master/README.md",
+	"esmodules": ["module/condition-lab.js"],
 	"languages": [
 		{
 			"lang": "en",
@@ -70,12 +75,12 @@
 	],
 	"packFolders": [
 		{
-			"name": "Condition Lab & Triggler",
+			"name": "Condition Lab",
 			"sorting": "a",
 			"packs": ["conditionsarchmage"]
 		}
 	],
-	"styles": ["styles/condition-lab-triggler.css"],
+	"styles": ["styles/condition-lab.css"],
 	"compatibility": {
 		"minimum": "13",
 		"verified": "13"

@@ -19,9 +19,6 @@
 <dt><a href="#Sidekick">Sidekick</a></dt>
 <dd><p>Provides helper methods for use elsewhere in the module (and has your back in a melee)</p>
 </dd>
-<dt><a href="#Triggler">Triggler</a></dt>
-<dd><p>Handles triggers for other gadgets in the module... or does it?!</p>
-</dd>
 </dl>
 
 ## Functions
@@ -65,7 +62,6 @@ Form application for managing mapping of Conditions to Icons and JournalEntries
         * [._onChangeIconPath(event)](#ConditionLab+_onChangeIconPath)
         * [._onClickActiveEffectConfig(event)](#ConditionLab+_onClickActiveEffectConfig)
         * [._onChangeReferenceId(event)](#ConditionLab+_onChangeReferenceId)
-        * [._onOpenTrigglerForm(event)](#ConditionLab+_onOpenTrigglerForm)
         * [._onAddRow(event)](#ConditionLab+_onAddRow)
         * [._onRemoveRow(event)](#ConditionLab+_onRemoveRow)
         * [._onChangeSortOrder(event)](#ConditionLab+_onChangeSortOrder)

@@ -127,9 +127,8 @@ export class Sidekick {
 	 */
 	static async loadTemplates() {
 		const templates = [
-			"modules/condition-lab-triggler/templates/partials/chat-card-condition-list.hbs",
-			"modules/condition-lab-triggler/templates/partials/condition-lab-row.hbs",
-			"modules/condition-lab-triggler/templates/partials/triggler-icon.hbs"
+			"modules/condition-lab/templates/partials/chat-card-condition-list.hbs",
+			"modules/condition-lab/templates/partials/condition-lab-row.hbs"
 		];
 		await loadTemplates(templates);
 	}

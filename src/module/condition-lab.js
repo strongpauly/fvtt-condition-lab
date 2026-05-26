@@ -12,8 +12,6 @@ import { EnhancedConditions } from "./enhanced-conditions/enhanced-conditions.js
 /* ------------------- Utils ------------------ */
 
 import { ConditionLab } from "./enhanced-conditions/condition-lab.js";
-import { TrigglerForm } from "./triggler/triggler-form.js";
-import { Triggler } from "./triggler/triggler.js";
 
 /* -------------------------------------------- */
 /*                    System                    */
@@ -32,18 +30,10 @@ Hooks.on("i18nInit", () => {
 	Sidekick.loadTemplates();
 
 	// Keybinds
-	game.keybindings.register("condition-lab-triggler", "openConditionLab", {
+	game.keybindings.register("condition-lab", "openConditionLab", {
 		name: "CLT.KEYBINDINGS.openConditionLab.name",
 		onDown: () => {
 			new ConditionLab().render(true);
-		},
-		restricted: true,
-		precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL
-	});
-	game.keybindings.register("condition-lab-triggler", "openTriggler", {
-		name: "CLT.KEYBINDINGS.openTriggler.name",
-		onDown: () => {
-			new TrigglerForm().render(true);
 		},
 		restricted: true,
 		precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL
@@ -70,10 +60,10 @@ Hooks.on("i18nInit", () => {
 			}
 		};
 		libWrapper.register(
-			"condition-lab-triggler",
+			"condition-lab",
 			"Token.prototype._refreshEffects",
 			function () {
-				const effectSize = game.settings.get("condition-lab-triggler", "effectSize");
+				const effectSize = game.settings.get("condition-lab", "effectSize");
 				// Use the default values if no setting found
 				const { multiplier = 2, divisor = 5 } = effectSizes[effectSize];
 
@@ -130,10 +120,10 @@ Hooks.on("ready", async () => {
 		});
 	game.clt.CoreSpecialStatusEffects = foundry.utils.deepClone(CONFIG.specialStatusEffects);
 	game.clt.supported = false;
-	let defaultMaps = game.settings.get("condition-lab-triggler", "defaultConditionMaps");
-	let conditionMap = game.settings.get("condition-lab-triggler", "activeConditionMap");
+	let defaultMaps = game.settings.get("condition-lab", "defaultConditionMaps");
+	let conditionMap = game.settings.get("condition-lab", "activeConditionMap");
 
-	const mapType = game.settings.get("condition-lab-triggler", "conditionMapType");
+	const mapType = game.settings.get("condition-lab", "conditionMapType");
 
 	// If there's no defaultMaps or defaultMaps doesn't include game system, check storage then set appropriately
 	if (
@@ -145,12 +135,12 @@ Hooks.on("ready", async () => {
 		)
 	) {
 		defaultMaps = await EnhancedConditions._loadDefaultMaps();
-		game.settings.set("condition-lab-triggler", "defaultConditionMaps", defaultMaps);
+		game.settings.set("condition-lab", "defaultConditionMaps", defaultMaps);
 	}
 
 	// If map type is not set and a default map exists for the system, set maptype to default
 	if (!mapType && defaultMaps instanceof Object && Object.keys(defaultMaps).includes(game.system.id)) {
-		game.settings.set("condition-lab-triggler", "conditionMapType", "default");
+		game.settings.set("condition-lab", "conditionMapType", "default");
 	}
 
 	// If there's no condition map, get the default one
@@ -159,13 +149,13 @@ Hooks.on("ready", async () => {
 		conditionMap = EnhancedConditions.getDefaultMap(defaultMaps);
 
 		if (game.user.isGM && conditionMap.length) {
-			game.settings.set("condition-lab-triggler", "activeConditionMap", conditionMap);
+			game.settings.set("condition-lab", "activeConditionMap", conditionMap);
 		}
 	}
 
 	// If map type is not set, now set to default
 	if (!mapType && conditionMap.length) {
-		game.settings.set("condition-lab-triggler", "conditionMapType", "default");
+		game.settings.set("condition-lab", "conditionMapType", "default");
 	}
 
 	// Update status icons accordingly
@@ -173,7 +163,7 @@ Hooks.on("ready", async () => {
 		// CONFIG.statusEffects
 		// CONFIG.specialStatusEffects
 	}
-	// const specialStatusEffectMap = game.settings.get("condition-lab-triggler", "specialStatusEffectMapping");
+	// const specialStatusEffectMap = game.settings.get("condition-lab", "specialStatusEffectMapping");
 	if (conditionMap.length) EnhancedConditions._updateStatusEffects(conditionMap);
 	setInterval(EnhancedConditions.updateConditionTimestamps, 15000);
 
@@ -186,14 +176,6 @@ Hooks.on("ready", async () => {
 /* -------------------------------------------- */
 /*                    Entity                    */
 /* -------------------------------------------- */
-
-/* ------------------- Actor ------------------ */
-
-Hooks.on("updateActor", (actor, updateData, options, userId) => {
-	// Workaround for actor array returned in hook for non triggering clients
-	if (game.userId !== userId) return;
-	Triggler._processUpdate(actor, updateData, "system");
-});
 
 /* --------------- Active Effect -------------- */
 
@@ -210,8 +192,8 @@ Hooks.on("deleteActiveEffect", (effect, options, userId) => {
 /* ------------------ Combat ------------------ */
 
 Hooks.on("updateCombat", (combat, update, options, userId) => {
-	const enableOutputCombat = game.settings.get("condition-lab-triggler", "conditionsOutputDuringCombat");
-	const outputChatSetting = game.settings.get("condition-lab-triggler", "conditionsOutputToChat");
+	const enableOutputCombat = game.settings.get("condition-lab", "conditionsOutputDuringCombat");
+	const outputChatSetting = game.settings.get("condition-lab", "conditionsOutputToChat");
 	const combatant = combat.combatant;
 
 	if (
@@ -243,7 +225,7 @@ Hooks.on("updateCombat", (combat, update, options, userId) => {
 
 /* -------------- Scene Controls -------------- */
 Hooks.on("getSceneControlButtons", function (hudButtons) {
-	if (game.user.isGM && game.settings.get("condition-lab-triggler", "sceneControls")) {
+	if (game.user.isGM && game.settings.get("condition-lab", "sceneControls")) {
 		const hud = $(hudButtons).find((val) => val.name === "token");
 		if (hud) {
 			hud.tools.push({
@@ -253,57 +235,20 @@ Hooks.on("getSceneControlButtons", function (hudButtons) {
 				button: true,
 				onClick: async () => new ConditionLab().render(true)
 			});
-			hud.tools.push({
-				name: "Triggler",
-				title: "Triggler",
-				icon: "fas fa-exclamation",
-				button: true,
-				onClick: async () => new TrigglerForm().render(true)
-			});
 		}
-	}
-});
-
-Hooks.on("renderSceneControls", (app, html, data) => {
-	const trigglerButton = $(html).find('li[data-tool="Triggler"]')[0];
-	if (trigglerButton) {
-		trigglerButton.style.display = "inline-block";
-		const exclamationMark = trigglerButton.children[0];
-		exclamationMark.style.marginRight = "0px";
-		const rightChevron = document.createElement("i");
-		rightChevron.classList.add("fas", "fa-angle-right");
-		rightChevron.style.marginRight = "0px";
-		trigglerButton.insertBefore(rightChevron, exclamationMark);
-		const leftChevron = document.createElement("i");
-		leftChevron.classList.add("fas", "fa-angle-left");
-		exclamationMark.after(leftChevron);
 	}
 });
 
 /* ------------------- Misc ------------------- */
 
-Hooks.on("renderSettingsConfig", (app, html, data, ...others) => {
-	const trigglerMenu = $(html).find("button[data-key=\"condition-lab-triggler.trigglerMenu\"]")[0];
-	if (trigglerMenu) {
-		const exclamationMark = trigglerMenu.children[0];
-		exclamationMark.style.margin = "0 -6px";
-		const rightChevron = document.createElement("i");
-		rightChevron.classList.add("fas", "fa-angle-right");
-		trigglerMenu.insertBefore(rightChevron, exclamationMark);
-		const leftChevron = document.createElement("i");
-		leftChevron.classList.add("fas", "fa-angle-left");
-		exclamationMark.after(leftChevron);
-	}
-});
-
 Hooks.on("renderMacroConfig", (app, html, data) => {
 	const typeSelect = $(html).find("select[name='type']");
 	const typeSelectDiv = typeSelect.closest("div");
-	const flag = app.object.getFlag("condition-lab-triggler", "macroTrigger");
-	const triggers = game.settings.get("condition-lab-triggler", "storedTriggers");
+	const flag = app.object.getFlag("condition-lab", "macroTrigger");
+	const triggers = game.settings.get("condition-lab", "storedTriggers");
 
 	const select = foundry.applications.fields.createSelectInput({
-		name: "flags.condition-lab-triggler.macroTrigger",
+		name: "flags.condition-lab.macroTrigger",
 		options: triggers,
 		value: flag,
 		blank: "CLT.ENHANCED_CONDITIONS.MacroConfig.NoTriggerSet",

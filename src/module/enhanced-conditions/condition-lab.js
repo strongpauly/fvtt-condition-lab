@@ -1,5 +1,4 @@
 import { Sidekick } from "../sidekick.js";
-import { TrigglerForm } from "../triggler/triggler-form.js";
 import EnhancedConditionMacroConfig from "./enhanced-condition-macro.js";
 import EnhancedConditionOptionConfig from "./enhanced-condition-option.js";
 import EnhancedConditionTriggerConfig from "./enhanced-condition-trigger.js";
@@ -15,12 +14,12 @@ export class ConditionLab extends FormApplication {
 		game.clt.conditionLab = this;
 		this.data = (game.clt.conditionLab ? game.clt.conditionLab.data : object) ?? null;
 		this.system = game.system.id;
-		this.initialMapType = game.settings.get("condition-lab-triggler", "conditionMapType");
+		this.initialMapType = game.settings.get("condition-lab", "conditionMapType");
 		this.mapType = null;
-		this.initialMap = game.settings.get("condition-lab-triggler", "activeConditionMap");
+		this.initialMap = game.settings.get("condition-lab", "activeConditionMap");
 		this.map = null;
 		this.displayedMap = null;
-		this.maps = game.settings.get("condition-lab-triggler", "defaultConditionMaps");
+		this.maps = game.settings.get("condition-lab", "defaultConditionMaps");
 		this.filterValue = "";
 		this.sortDirection = "";
 	}
@@ -29,7 +28,7 @@ export class ConditionLab extends FormApplication {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			id: "cub-condition-lab",
 			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.Title"),
-			template: "modules/condition-lab-triggler/templates/condition-lab.hbs",
+			template: "modules/condition-lab/templates/condition-lab.hbs",
 			classes: ["sheet", "condition-lab-form"],
 			width: 780,
 			height: 680,
@@ -62,10 +61,10 @@ export class ConditionLab extends FormApplication {
 		const filterTitle = game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.FilterInputTitle");
 		const filterValue = this.filterValue;
 
-		const defaultMaps = game.settings.get("condition-lab-triggler", "defaultConditionMaps");
+		const defaultMaps = game.settings.get("condition-lab", "defaultConditionMaps");
 		// const mappedSystems = Object.keys(defaultMaps) || [];
 		const mappedSystems = [];
-		const mapTypeChoices = game.settings.settings.get("condition-lab-triggler.conditionMapType").choices;
+		const mapTypeChoices = game.settings.settings.get("condition-lab.conditionMapType").choices;
 
 		// If there's no default map for this system don't provide the "default" choice
 		if (!mappedSystems.includes(game.system.id)) {
@@ -78,12 +77,12 @@ export class ConditionLab extends FormApplication {
 
 		this.mapType ||= this.initialMapType || "other";
 		const conditionMap = (this.map ||= foundry.utils.duplicate(this.initialMap));
-		const triggers = game.settings.get("condition-lab-triggler", "storedTriggers").map((t) => {
+		const triggers = game.settings.get("condition-lab", "storedTriggers").map((t) => {
 			return [t.id, t.text];
 		});
 
 		const isDefault = this.mapType === "default";
-		const outputChatSetting = game.settings.get("condition-lab-triggler", "conditionsOutputToChat");
+		const outputChatSetting = game.settings.get("condition-lab", "conditionsOutputToChat");
 		const disableChatOutput = isDefault || !outputChatSetting;
 
 		for (const condition of conditionMap) {
@@ -173,7 +172,7 @@ export class ConditionLab extends FormApplication {
 		let references = [];
 		let newMap = [];
 		const rows = [];
-		const existingMap = this.map ?? game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const existingMap = this.map ?? game.settings.get("condition-lab", "activeConditionMap");
 
 		// need to tighten these up to check for the existence of digits after the word
 		const conditionRegex = /condition/i;
@@ -259,11 +258,11 @@ export class ConditionLab extends FormApplication {
 	 */
 	async _restoreDefaults({ clearCache = false } = {}) {
 		const system = this.system;
-		let defaultMaps = game.settings.get("condition-lab-triggler", "defaultConditionMaps");
+		let defaultMaps = game.settings.get("condition-lab", "defaultConditionMaps");
 
 		if (clearCache) {
 			defaultMaps = await EnhancedConditions._loadDefaultMaps();
-			game.settings.set("condition-lab-triggler", "defaultConditionMaps", defaultMaps);
+			game.settings.set("condition-lab", "defaultConditionMaps", defaultMaps);
 		}
 		const tempMap = this.mapType !== "other" && defaultMaps && defaultMaps[system] ? defaultMaps[system] : [];
 
@@ -278,7 +277,7 @@ export class ConditionLab extends FormApplication {
 	 * @param {object} formData
 	 */
 	async _updateObject(event, formData) {
-		const showDialogSetting = game.settings.get("condition-lab-triggler", "showSortDirectionDialog");
+		const showDialogSetting = game.settings.get("condition-lab", "showSortDirectionDialog");
 
 		if (this.sortDirection && showDialogSetting) {
 			await Dialog.confirm({
@@ -287,7 +286,7 @@ export class ConditionLab extends FormApplication {
 				yes: ($html) => {
 					const checkbox = $html[0].querySelector("input[name='dont-show-again']");
 					if (checkbox.checked) {
-						game.settings.set("condition-lab-triggler", "showSortDirectionDialog", false);
+						game.settings.set("condition-lab", "showSortDirectionDialog", false);
 					}
 					this._processFormUpdate(formData);
 				},
@@ -323,8 +322,8 @@ export class ConditionLab extends FormApplication {
 		this.mapType = this.initialMapType = mapType;
 		const preparedMap = EnhancedConditions._prepareMap(newMap);
 
-		await game.settings.set("condition-lab-triggler", "conditionMapType", mapType);
-		await game.settings.set("condition-lab-triggler", "activeConditionMap", preparedMap);
+		await game.settings.set("condition-lab", "conditionMapType", mapType);
+		await game.settings.set("condition-lab", "activeConditionMap", preparedMap);
 
 		this._finaliseSave(preparedMap);
 	}
@@ -364,7 +363,7 @@ export class ConditionLab extends FormApplication {
 	async _importFromJSONDialog() {
 		new Dialog({
 			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle"),
-			content: await renderTemplate("modules/condition-lab-triggler/templates/import-conditions.html", {}),
+			content: await renderTemplate("modules/condition-lab/templates/import-conditions.html", {}),
 			buttons: {
 				import: {
 					icon: '<i class="fas fa-file-import"></i>',
@@ -489,7 +488,6 @@ export class ConditionLab extends FormApplication {
 		const inputs = html.find("input");
 		const mapTypeSelector = html.find("select[class='map-type']");
 		const activeEffectButton = html.find("button.active-effect-config");
-		const triggerAnchor = html.find("a[class='trigger']");
 		const addRowAnchor = html.find("a[name='add-row']");
 		const removeRowAnchor = html.find("a[class='remove-row']");
 		const changeOrderAnchor = html.find(".row-controls a.move-up, .row-controls a.move-down");
@@ -504,7 +502,6 @@ export class ConditionLab extends FormApplication {
 		inputs.on("change", (event) => this._onChangeInputs(event));
 		mapTypeSelector.on("change", (event) => this._onChangeMapType(event));
 		activeEffectButton.on("click", (event) => this._onClickActiveEffectConfig(event));
-		triggerAnchor.on("click", (event) => this._onOpenTrigglerForm(event));
 		addRowAnchor.on("click", async (event) => this._onAddRow(event));
 		removeRowAnchor.on("click", async (event) => this._onRemoveRow(event));
 		changeOrderAnchor.on("click", (event) => this._onChangeSortOrder(event));
@@ -612,7 +609,7 @@ export class ConditionLab extends FormApplication {
 
 		if (!conditionId) return;
 
-		const conditions = this.map ?? game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const conditions = this.map ?? game.settings.get("condition-lab", "activeConditionMap");
 		const condition = conditions.length ? conditions.find((c) => c.id === conditionId) : null;
 
 		if (!condition) return;
@@ -621,10 +618,10 @@ export class ConditionLab extends FormApplication {
 
 		if (!conditionEffect) return;
 
-		if (!foundry.utils.hasProperty(conditionEffect, "flags.condition-lab-triggler.conditionId")) {
+		if (!foundry.utils.hasProperty(conditionEffect, "flags.condition-lab.conditionId")) {
 			setProperty(
 				conditionEffect,
-				"flags.condition-lab-triggler.conditionId",
+				"flags.condition-lab.conditionId",
 				conditionId
 			);
 		}
@@ -657,25 +654,6 @@ export class ConditionLab extends FormApplication {
 	}
 
 	/**
-	 * Open Triggler form event handler
-	 * @param {*} event
-	 */
-	_onOpenTrigglerForm(event) {
-		event.preventDefault();
-		const anchor = event.currentTarget;
-		const select = anchor.parentElement.nextElementSibling;
-		const id = select.value;
-		const conditionLabRow = select.name.match(/\d+$/)[0];
-
-		const data = {
-			id,
-			conditionLabRow
-		};
-
-		new TrigglerForm(data, { parent: this }).render(true);
-	}
-
-	/**
 	 * Add Row event handler
 	 * @param {*} event
 	 */
@@ -698,7 +676,7 @@ export class ConditionLab extends FormApplication {
 
 		const newMap = foundry.utils.duplicate(this.map);
 		const exisitingIds = this.map.filter((c) => c.id).map((c) => c.id);
-		const outputChatSetting = game.settings.get("condition-lab-triggler", "conditionsOutputToChat");
+		const outputChatSetting = game.settings.get("condition-lab", "conditionsOutputToChat");
 
 		newMap.push({
 			id: Sidekick.createId(exisitingIds),
