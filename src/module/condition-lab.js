@@ -239,33 +239,6 @@ Hooks.on("getSceneControlButtons", function (hudButtons) {
 	}
 });
 
-/* ------------------- Misc ------------------- */
-
-Hooks.on("renderMacroConfig", (app, html, data) => {
-	const typeSelect = $(html).find("select[name='type']");
-	const typeSelectDiv = typeSelect.closest("div");
-	const flag = app.object.getFlag("condition-lab", "macroTrigger");
-	const triggers = game.settings.get("condition-lab", "storedTriggers");
-
-	const select = foundry.applications.fields.createSelectInput({
-		name: "flags.condition-lab.macroTrigger",
-		options: triggers,
-		value: flag,
-		blank: "CLT.ENHANCED_CONDITIONS.MacroConfig.NoTriggerSet",
-		localize: true,
-		sort: true,
-		valueAttr: "id",
-		labelAttr: "text"
-	});
-
-	typeSelectDiv.after($(`
-		<div class="form-group">
-			<label>${game.i18n.localize("CLT.Trigger")}</label>
-			${select.outerHTML}
-		</div>
-	`));
-});
-
 /* ------------------- Chat ------------------- */
 
 Hooks.on("renderChatLog", (app, html, data) => {

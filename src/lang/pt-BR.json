@@ -1,6 +1,5 @@
 {
   "CLT": {
-    "Trigger": "Gatilho",
     "ENHANCED_CONDITIONS": {
       "OutputChatConfirm": {
         "Title": "Ativar saída para chat para todas as condições?",
@@ -47,16 +46,7 @@
         "ApplyHeading": "Macro ao Aplicar",
         "RemoveHeading": "Macro ao remover",
         "Description": "Selecione uma macro para executar quando esta condição for adicionada ou removida de um token ou ator",
-        "NoTriggerSet": "--Sem Gatilho Definido--",
         "SelectNone": "--Sem Macro--"
-      },
-      "TriggerConfig": {
-        "Title": "Configuração do Gatilho",
-        "Heading": "Gatilhos",
-        "ApplyHeading": "Aplicar gatilho",
-        "RemoveHeading": "Remover gatilho",
-        "Description": "Gatilhos que aplicam ou removem esta condição",
-        "SelectNone": "--Sem gatilho--"
       },
       "OptionConfig": {
         "Title": "Configuração de Opção",
@@ -159,9 +149,6 @@
     "KEYBINDINGS": {
       "openConditionLab": {
         "name": "Abrir Laboratório de Condição"
-      },
-      "openTriggler": {
-        "name": "Abrir Triggler"
       }
     },
     "MIGRATION": {
@@ -215,73 +202,9 @@
           }
         }
       },
-      "Triggler": {
-        "TriggersN": "Triggler",
-        "TriggersH": "Armazena os gatilhos do Triggler"
-      },
       "SceneControls": {
         "Name": "Atalhos de Controles de Cena",
-        "Hint": "Adiciona dois botões aos Controles de Token para abrir as janelas Condition Lab ou Triggler. Note que você também pode abri-los definindo combinações de teclas em vez de usar essa configuração."
-      }
-    },
-    "TRIGGLER": {
-      "ImportTitle": "Importar gatilhos",
-      "TriggerMismatch": "Esses gatilhos não correspondem ao seu sistema de jogo e podem não funcionar conforme o esperado.",
-      "App": {
-        "Labels": {
-          "Type": "Tipo",
-          "Triggers": "Gatilhos existentes",
-          "Category": "Categoria",
-          "Attribute": "Atributo",
-          "Property": "Propriedade {number}",
-          "Operator": "Operador",
-          "Value": "Valor"
-        },
-        "AdvancedTrigger": {
-          "ActorProperty": {
-            "Label": "Propriedade de atualização do ator",
-            "Note": "Defina o caminho da propriedade a ser usado para atualizações do Ator. O caminho é relativo ao objeto de atualização passado para o hook updateActor. Note que isso é necessário se a propriedade de atualização de token não estiver definida.",
-            "Placeholder": "por exemplo: system.attributes.hp.value"
-          },
-          "ActorProperty2": {
-            "Label": "Propriedade de comparação de atores",
-            "Note": "Opcionalmente, defina uma segunda propriedade para comparar com a primeira -- esse caminho é relativo ao próprio objeto Actor",
-            "Placeholder": "por exemplo: system.attributes.hp.max (opcional)"
-          },
-          "TokenProperty": {
-            "Label": "Propriedade de atualização de token",
-            "Note": "Defina o caminho da propriedade a ser usado para atualizações de Token--o caminho é relativo ao objeto de atualização passado para o hook updateToken. Note que isso é necessário se a Propriedade de atualização do ator não estiver definida.",
-            "Placeholder": "por exemplo: actor.system.attributes.hp.value"
-          },
-          "TokenProperty2": {
-            "Label": "Propriedade de comparação de token",
-            "Note": "Opcionalmente, defina uma segunda propriedade para comparar com a primeira -- esse caminho é relativo ao próprio objeto Token",
-            "Placeholder": "por exemplo: ator.system.attributes.hp.max (opcional)"
-          },
-          "Property": {
-            "Hint": "O caminho para a propriedade atualizada a ser atendida. Os valores de entrada do Ator ou Token informam ao Triggler onde procurar cada tipo de entidade"
-          },
-          "OperatorValue": {
-            "Heading": "Operador/Valor",
-            "Note": "Sempre necessário. O operador e o valor se aplicam às propriedades de ator ou token definidas acima"
-          },
-          "Name": {
-            "Label": "Nome do gatilho",
-            "Warning": "O nome é necessário para gatilhos avançados!"
-          }
-        },
-        "TriggerType": {
-          "Simple": {
-            "Label": "Gatilho Simples"
-          },
-          "Advanced": {
-            "Label": "Gatilho Avançado"
-          }
-        },
-        "Options": {
-          "Title": "Opções"
-        },
-        "SaveSuccessful": "Gatilho salvo com sucesso!"
+        "Hint": "Adiciona um botão aos Controles de Token para abrir a janela do Condition Lab. Note que você também pode abri-la definindo uma combinação de teclas em vez de usar essa configuração."
       }
     },
     "WORDS": {

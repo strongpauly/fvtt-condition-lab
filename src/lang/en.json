@@ -1,6 +1,5 @@
 {
 	"CLT": {
-		"Trigger": "Trigger",
 		"ENHANCED_CONDITIONS": {
 			"OutputChatConfirm": {
 				"Title": "Enable Output to Chat for All Conditions?",
@@ -47,16 +46,7 @@
 				"ApplyHeading": "Apply Macro",
 				"RemoveHeading": "Remove Macro",
 				"Description": "Select a macro to execute when this condition is added to or removed from a token/actor",
-				"NoTriggerSet": "--No Trigger Set--",
 				"SelectNone": "--No Macro--"
-			},
-			"TriggerConfig": {
-				"Title": "Trigger Configuration",
-				"Heading": "Triggers",
-				"ApplyHeading": "Apply Trigger",
-				"RemoveHeading": "Remove Trigger",
-				"Description": "Triggers that Apply or Remove this Condition",
-				"SelectNone": "--No Trigger--"
 			},
 			"OptionConfig": {
 				"Title": "Option Configuration",
@@ -159,13 +149,10 @@
 		"KEYBINDINGS": {
 			"openConditionLab": {
 				"name": "Open Condition Lab"
-			},
-			"openTriggler": {
-				"name": "Open Triggler"
 			}
 		},
 		"MIGRATION": {
-			"Title": "Condition Lab & Triggler: CUB Settings Migration",
+			"Title": "Condition Lab: CUB Settings Migration",
 			"Content": "CUB settings have been detected, would you like to import these settings? This choice will overwrite CLT's settings. Your CUB settings won't be affected."
 		},
 		"SETTINGS": {
@@ -215,73 +202,9 @@
 					}
 				}
 			},
-			"Triggler": {
-				"TriggersN": "Triggler Triggers",
-				"TriggersH": "A trigger-management system for token/actor attribute changes"
-			},
 			"SceneControls": {
 				"Name": "Scene Controls Shortcuts",
-				"Hint": "Adds two buttons to the Token Controls to open the Condition Lab or Triggler windows. Note that you can also open those by setting keybindings instead of using this setting."
-			}
-		},
-		"TRIGGLER": {
-			"ImportTitle": "Import Triggers",
-			"TriggerMismatch": "These triggers do not match your game system and may not work as expected.",
-			"App": {
-				"Labels": {
-					"Type": "Type",
-					"Triggers": "Existing Triggers",
-					"Category": "Category",
-					"Attribute": "Attribute",
-					"Property": "Property {number}",
-					"Operator": "Operator",
-					"Value": "Value"
-				},
-				"AdvancedTrigger": {
-					"ActorProperty": {
-						"Label": "Actor Update Property",
-						"Note": "Set the property path to use for Actor updates. The path is relative to the update object passed to the updateActor hook. Note that this is required if Token Update Property is not set.",
-						"Placeholder": "eg. system.attributes.hp.value"
-					},
-					"ActorProperty2": {
-						"Label": "Actor Comparison Property",
-						"Note": "Optionally set a second property to compare the first one against--this path is relative to the Actor object itself",
-						"Placeholder": "eg. system.attributes.hp.max (optional)"
-					},
-					"TokenProperty": {
-						"Label": "Token Update Property",
-						"Note": "Set the property path to use for Token updates--the path is relative to the update object passed to the updateToken hook. Note that this is required if Actor Update Property is not set.",
-						"Placeholder": "eg. actor.system.attributes.hp.value"
-					},
-					"TokenProperty2": {
-						"Label": "Token Comparison Property",
-						"Note": "Optionally set a second property to compare the first one against--this path is relative to the Token object itself",
-						"Placeholder": "eg. actor.system.attributes.hp.max (optional)"
-					},
-					"Property": {
-						"Hint": "The path to the updated property to listen for. The Actor and Token Entry Point values tell Triggler where to look for each entity type"
-					},
-					"OperatorValue": {
-						"Heading": "Operator & Value",
-						"Note": "Always required. The operator and value apply to both Actor and Token Properties set above"
-					},
-					"Name": {
-						"Label": "Trigger Name",
-						"Warning": "Name is required for advanced triggers!"
-					}
-				},
-				"TriggerType": {
-					"Simple": {
-						"Label": "Simple Trigger"
-					},
-					"Advanced": {
-						"Label": "Advanced Trigger"
-					}
-				},
-				"Options": {
-					"Title": "Options"
-				},
-				"SaveSuccessful": "Trigger successfully saved!"
+				"Hint": "Adds a button to the Token Controls to open the Condition Lab window. Note that you can also open it by setting a keybinding instead of using this setting."
 			}
 		},
 		"WORDS": {

@@ -1,7 +1,6 @@
 import { Sidekick } from "../sidekick.js";
 import EnhancedConditionMacroConfig from "./enhanced-condition-macro.js";
 import EnhancedConditionOptionConfig from "./enhanced-condition-option.js";
-import EnhancedConditionTriggerConfig from "./enhanced-condition-trigger.js";
 import { EnhancedConditions } from "./enhanced-conditions.js";
 import EnhancedEffectConfig from "./enhanced-effect-config.js";
 
@@ -77,9 +76,6 @@ export class ConditionLab extends FormApplication {
 
 		this.mapType ||= this.initialMapType || "other";
 		const conditionMap = (this.map ||= foundry.utils.duplicate(this.initialMap));
-		const triggers = game.settings.get("condition-lab", "storedTriggers").map((t) => {
-			return [t.id, t.text];
-		});
 
 		const isDefault = this.mapType === "default";
 		const outputChatSetting = game.settings.get("condition-lab", "conditionsOutputToChat");
@@ -136,7 +132,6 @@ export class ConditionLab extends FormApplication {
 			conditionMap,
 			displayedMap,
 			conditionMapLength,
-			triggers,
 			isDefault,
 			disableChatOutput,
 			unsavedMap
@@ -212,8 +207,6 @@ export class ConditionLab extends FormApplication {
 			const existingCondition = existingMap && id ? existingMap.find((c) => c.id === id) : null;
 			const {
 				activeEffect = null,
-				applyTrigger = null,
-				removeTrigger = null,
 				macros = null,
 				options = {}
 			} = existingCondition || {};
@@ -223,8 +216,6 @@ export class ConditionLab extends FormApplication {
 				name,
 				img: icons[i],
 				reference: references[i],
-				applyTrigger,
-				removeTrigger,
 				activeEffect,
 				macros,
 				options
@@ -496,7 +487,6 @@ export class ConditionLab extends FormApplication {
 		const filterInput = html.find("input[name='filter-list']");
 		const sortButton = html.find("a.sort-list");
 		const macroConfigButton = html.find("button.macro-config");
-		const triggerConfigButton = html.find("button.trigger-config");
 		const optionConfigButton = html.find("button.option-config");
 
 		inputs.on("change", (event) => this._onChangeInputs(event));
@@ -510,7 +500,6 @@ export class ConditionLab extends FormApplication {
 		filterInput.on("input", (event) => this._onChangeFilter(event));
 		sortButton.on("click", (event) => this._onClickSortButton(event));
 		macroConfigButton.on("click", (event) => this._onClickMacroConfig(event));
-		triggerConfigButton.on("click", (event) => this._onClickTriggerConfig(event));
 		optionConfigButton.on("click", (event) => this._onClickOptionConfig(event));
 
 		super.activateListeners(html);
@@ -683,7 +672,6 @@ export class ConditionLab extends FormApplication {
 			name: newConditionName,
 			img: "icons/svg/d20-black.svg",
 			reference: "",
-			trigger: "",
 			options: {
 				outputChat: outputChatSetting
 			}
@@ -901,21 +889,6 @@ export class ConditionLab extends FormApplication {
 	}
 
 	/**
-	 * Trigger Config button click handler
-	 * @param {*} event
-	 */
-	_onClickTriggerConfig(event) {
-		const rowLi = event.target.closest("li");
-		const conditionId = rowLi ? rowLi.dataset.conditionId : null;
-
-		if (!conditionId) return;
-
-		const condition = this.map.find((c) => c.id === conditionId);
-
-		new EnhancedConditionTriggerConfig(condition).render(true);
-	}
-
-	/**
 	 * Option Config button click handler
 	 * @param {*} event
 	 */
@@ -961,8 +934,6 @@ export class ConditionLab extends FormApplication {
 			"img",
 			"options",
 			"reference",
-			"applyTrigger",
-			"removeTrigger",
 			"activeEffect"
 		];
 		return propsToCheck.some((p) => this._hasPropertyChanged(p, existingEntry, entry));

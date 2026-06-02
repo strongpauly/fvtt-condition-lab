@@ -80,35 +80,7 @@
 			"TokenUtility": {
 				"TokenEffectSizeN": "Rozmiar Ikony Efektu Żetonu",
 				"TokenEffectSizeH": "Ustal rozmiar ikony efektu na żetonie. Liczby definiują ilość pokazywanych efektów (X * Y). Domyślnie: Mała - 5x5"
-			},
-			"Triggler": {
-				"TriggersN": "Triggery Trigglera",
-				"TriggersH": "Zautomatyzowany system reagowania na zmiany atrybutów postaci/żetnów"
 			}
-		},
-		"TRIGGLER": {
-			"App.AdvancedTrigger.Actor.Note": "Ustaw ścieżkę właściwości używanej do akutalizacji Aktorów--ścieżka musi być podana względem obiektu podanego do hooka updateActor.",
-			"App.AdvancedTrigger.Actor.Note2": "Opcjonalnie podaj dodatkową właściwość, z którą porównywana będzie pierwsza--ta ścieżka jest podawana względem samego Aktora",
-			"App.AdvancedTrigger.Token.Note": "Ustaw ścieżkę właściwości używanej do akutalizacji Żetonów--ścieżka musi być podana względem obiektu podanego do hooka updateToken.",
-			"App.AdvancedTrigger.Token.Note2": "Opcjonalnie podaj dodatkową właściwość, z którą porównywana będzie pierwsza--ta ścieżka jest podawana względem samego Żetonu",
-			"App.AdvancedTrigger.ActorProperty.Label": "Właściwość Aktualizacji Aktora",
-			"App.AdvancedTrigger.ActorProperty.Placeholder": "np. data.attributes.hp.value (wymagane jeśli nie podano Właściwości Aktualizacji Aktora)",
-			"App.AdvancedTrigger.ActorProperty2.Label": "Właściowść Porównawcza Aktora",
-			"App.AdvancedTrigger.ActorProperty2.Placeholder": "np. data.data.attributes.hp.max (opcjonalna)",
-			"App.AdvancedTrigger.TokenProperty.Label": "Właściwość Aktualizacji Żetonu",
-			"App.AdvancedTrigger.TokenProperty.Placeholder": "np. actorData.attributes.hp.value (wymagane jeśli nie podano Właściwości Aktualizacji Aktora)",
-			"App.AdvancedTrigger.TokenProperty2.Label": "Właściowść Porównawcza Aktora",
-			"App.AdvancedTrigger.TokenProperty2.Placeholder": "np. actor.data.attributes.hp.max (opcjonalna)",
-			"App.AdvancedTrigger.Property.Hint": "Ścieżka do aktualizowanej właściwości, na której następuje nasłuch. Punkty Wejściowe Aktora i Żetonu informują Triggler gdzie szukać w każdym z rodzajów encji",
-			"App.TriggerType.Simple.Label": "Prosty Trigger",
-			"App.TriggerType.Advanced.Label": "Zaawansowany Trigger",
-			"App.Options.Title": "Opcje",
-			"App.SaveSuccessful": "Z powodzeniem zapisano trigger!",
-			"App.AdvancedTrigger.OperatorValue.Heading": "Operator/Wartość",
-			"App.AdvancedTrigger.OperatorValue.Note": "Zawsze wymagane. Operator oraz wartość ablikowane są do podanych wyżej właściwości zarówno Aktora co Żetonu",
-			"App.AdvancedTrigger.Name.Label": "Nazwa Triggera",
-			"App.AdvancedTrigger.Name.Placeholder": "(wymagana przy zaawansowanych triggerach)",
-			"App.AdvancedTrigger.Name.Warning": "Dla zaawansowanych triggerów wymagana jest nazwa!"
 		},
 		"WORDS": {
 			"IUnderstand": "Rozumiem",

@@ -6,8 +6,6 @@
 			"name": "Focused",
 			"icon": "icons/svg/upgrade.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.WGljaB1SMqPtXDwC]{Focused}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -24,8 +22,6 @@
 			"name": "Aiming",
 			"icon": "icons/svg/target.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.sNhLDTvRmn4LG4Qj]{Aiming}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -42,8 +38,6 @@
 			"name": "Guarding",
 			"icon": "icons/svg/shield.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.ZzpRbp4XIFV5y8rW]{Guarding}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -60,8 +54,6 @@
 			"name": "Reeling",
 			"icon": "icons/svg/daze.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.2RqmHH9RbzJKjdKA]{Reeling}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -78,8 +70,6 @@
 			"name": "Hurt",
 			"icon": "icons/svg/acid.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.7buKwZrZVy8OwPhx]{Hurt}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -96,8 +86,6 @@
 			"name": "Afraid",
 			"icon": "systems/ironclaw2e/icons/status/afraid.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.krkg0YwKTNyD8BPM]{Afraid}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -114,8 +102,6 @@
 			"name": "Injured",
 			"icon": "icons/svg/blood.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.XZ1nn0BJoBGtHSYt]{Injured}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -132,8 +118,6 @@
 			"name": "Dying",
 			"icon": "systems/ironclaw2e/icons/status/dying.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.1Jg9RzQ24bpHnh7A]{Dying}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -150,8 +134,6 @@
 			"name": "Dead",
 			"icon": "icons/svg/skull.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.JsnatC5y42DGbPP3]{Dead}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": true,
@@ -168,8 +150,6 @@
 			"name": "Overkilled",
 			"icon": "systems/ironclaw2e/icons/status/overkilled.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.iL6ssGkLXwHPqRLh]{Overkilled}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": true,
@@ -186,8 +166,6 @@
 			"name": "Asleep",
 			"icon": "icons/svg/sleep.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.fy5EtGmfIZbpbqd1]{Asleep}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -204,8 +182,6 @@
 			"name": "Unconscious",
 			"icon": "icons/svg/unconscious.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.y17nrzjqcBNdnyVo]{Unconscious}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": true,
@@ -222,8 +198,6 @@
 			"name": "Burdened",
 			"icon": "systems/ironclaw2e/icons/status/burdened.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.pJTP7nRDfLCXTAzO]{Burdened}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -240,8 +214,6 @@
 			"name": "Over-Burdened",
 			"icon": "systems/ironclaw2e/icons/status/overburdened.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.Ms6nfCALR2RxiwFc]{Over-Burdened}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": {
 				"label": "Over-Burdened",
 				"icon": "systems/ironclaw2e/icons/status/overburdened.svg",
@@ -272,8 +244,6 @@
 			"name": "Cannot Move",
 			"icon": "systems/ironclaw2e/icons/status/cantmove.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.8X3gh1U1g5NQxwbA]{Cannot Move}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -290,8 +260,6 @@
 			"name": "Fatigued",
 			"icon": "icons/svg/degen.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.O8Cf7H1AoijQfdmL]{Fatigued}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -308,8 +276,6 @@
 			"name": "Sick",
 			"icon": "icons/svg/poison.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.HFHtUwuSoZ6wQutn]{Sick}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -326,8 +292,6 @@
 			"name": "Confused",
 			"icon": "icons/svg/stoned.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.E156mwoPTBUaagBB]{Confused}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -344,8 +308,6 @@
 			"name": "Terrified",
 			"icon": "systems/ironclaw2e/icons/status/terrified.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.soFkqUQFGaY3Q8IM]{Terrified}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -362,8 +324,6 @@
 			"name": "Enraged",
 			"icon": "icons/svg/explosion.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.2TtNJmDXp79MvLk9]{Enraged}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -380,8 +340,6 @@
 			"name": "Knockdown",
 			"icon": "icons/svg/falling.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.Rs6XYXEEYOIbUVZo]{Knockdown}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -398,8 +356,6 @@
 			"name": "Berserk",
 			"icon": "icons/svg/hazard.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.dtpk97W1sWJY68zF]{Berserk}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -416,8 +372,6 @@
 			"name": "Blinded",
 			"icon": "icons/svg/blind.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.XW0PM0eiepT2fqcD]{Blinded}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -434,8 +388,6 @@
 			"name": "Silenced",
 			"icon": "icons/svg/silenced.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.8WNaDcPi0IJbaJAk]{Silenced}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -452,8 +404,6 @@
 			"name": "Full Tilt",
 			"icon": "icons/svg/up.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.C9275OGG3YcLz1cb]{Full Tilt}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -470,8 +420,6 @@
 			"name": "Slowed",
 			"icon": "icons/svg/down.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.nbQkEI0uPTHdQtPk]{Slowed}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -488,8 +436,6 @@
 			"name": "Immobilized",
 			"icon": "icons/svg/mountain.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.lveZKbwsOHC8wg25]{Immobilized}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -506,8 +452,6 @@
 			"name": "Half-Buried",
 			"icon": "icons/svg/ruins.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.2oqPSchTRfNviHhm]{Half-Buried}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -524,8 +468,6 @@
 			"name": "On Fire",
 			"icon": "icons/svg/fire.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.9SQeyWG4sy1vaXO4]{On Fire}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -542,8 +484,6 @@
 			"name": "Mesmerized",
 			"icon": "icons/svg/sun.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.EMsCXyLEv1SEXIT4]{Mesmerized}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -560,8 +500,6 @@
 			"name": "Marionette",
 			"icon": "icons/svg/paralysis.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.QJyebhpwRNfvkFEi]{Marionette}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -578,8 +516,6 @@
 			"name": "Controlled",
 			"icon": "icons/svg/statue.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.rjHftAZgQQTg41ag]{Controlled}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -596,8 +532,6 @@
 			"name": "All Fours",
 			"icon": "icons/svg/pawprint.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.MItXHxvNgfSCFenc]{All Fours}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -614,8 +548,6 @@
 			"name": "Flying",
 			"icon": "icons/svg/wing.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.zghrfBq4iiKosTKu]{Flying}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -632,8 +564,6 @@
 			"name": "Grappled",
 			"icon": "icons/svg/net.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.lQRKvbZYOo7izSdT]{Grappled}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -650,8 +580,6 @@
 			"name": "Hiding",
 			"icon": "icons/svg/mystery-man.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.5J32lLlKCtZhFbuR]{Hiding}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -668,8 +596,6 @@
 			"name": "Temporary Ward",
 			"icon": "icons/svg/aura.svg",
 			"referenceId": "@Compendium[ironclaw2e.statuseffects.UOSMGqjqbc8GwAXe]{Temporary Ward}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -686,8 +612,6 @@
 			"name": "Misc-A",
 			"icon": "icons/svg/eye.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -704,8 +628,6 @@
 			"name": "Misc-B",
 			"icon": "icons/svg/clockwork.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -722,8 +644,6 @@
 			"name": "Misc-C",
 			"icon": "icons/svg/castle.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -740,8 +660,6 @@
 			"name": "Misc-D",
 			"icon": "icons/svg/book.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -758,8 +676,6 @@
 			"name": "Misc-E",
 			"icon": "icons/svg/coins.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -776,8 +692,6 @@
 			"name": "Misc-F",
 			"icon": "icons/svg/sound.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,
@@ -794,8 +708,6 @@
 			"name": "Misc-G",
 			"icon": "icons/svg/tower-flag.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"activeEffect": null,
 			"options": {
 				"overlay": false,

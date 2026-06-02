@@ -6,19 +6,15 @@
 			"ApplyCondition.Failed.NoCondition": "Error al aplicar la condición. No se ha podido encontrar la condición:",
 			"ApplyCondition.Failed.NoIcon": "Error al aplicar la condición. No se ha podido encontrar el icono.",
 			"ApplyCondition.Failed.AlreadyActive": "ya está activo. Error al aplicar la condición",
-
 			"GetConditions.Failed.NoToken": "Error en la aplicación de las condiciones. No se ha proporcionado ninguna entidad y no se ha podido encontrar ninguna automáticamente",
 			"GetConditions.Failed.NoCondition": "Error en la aplicación de las condiciones. No se ha encontrado un Mapeo",
 			"GetConditions.Failed.NoResults": "Error en la aplicación de las condiciones. No se ha encontrado la condición en el Actor/Token",
-
 			"RemoveCondition.Failed.NoToken": "Error en la eliminicación de la condición. No se ha proporcionado ningún token",
 			"RemoveCondition.Failed.NoCondition": "Error en la eliminicación de la condición. No se ha encontrado una condición llamada:",
 			"RemoveCondition.Failed.NoIcon": "Error en la eliminicación de la condición. No se ha encontrado el icono",
 			"RemoveCondition.Failed.NotActive": "no está activo en el token. Error en la eliminicación de la condición.",
-
 			"RemoveAllConditions.Failed.NoToken": "Error en la eliminicación de las condiciones. No se ha proporcionado ningún token",
 			"RemoveAllConditions.Failed.NoCondition": "Error en la eliminicación de las condiciones. No hay ningún Mapeo de condiciones activo",
-
 			"Lab.Title": "Laboratorio de Condiciones",
 			"Lab.Hint": "Ofrece la posibilidad de asignar Condiciones a los iconos de efectos de estado",
 			"Lab.MappingType.Label": "Tipo de Mapeo",
@@ -48,11 +44,9 @@
 			"PreventativeSaveReminder.Title": "CUB - Enhanced Conditions | Preventative Save Reminder",
 			"PreventativeSaveReminder.Content": "<p>Para evitar los problemas derivados de la migración a <i>Active Effects</i>, abre el <strong>Laboratorio de Conciciones</strong> y haz clic en el botón <strong>Guardar Mapeo</strong> si no lo has hecho desde la versión CUB v1.3.0.</p><p>Esto garantizará que su Mapeo de condiciones se convierta correctamente.</p>",
 			"PreventativeSaveReminder.Suppress": "No volver a mostrar este recordatorio",
-
 			"ChatCard.Title.Active": "Condiciones activas",
 			"ChatCard.Title.Added": "Condiciones añadidas",
 			"ChatCard.Title.Removed": "Condiciones eliminadas",
-
 			"ChatCard.Buttons.Undo": "Desahcer Eliminar condición",
 			"ChatCard.Buttons.Remove": "Eliminar condición"
 		},
@@ -84,35 +78,7 @@
 			"TokenUtility": {
 				"TokenEffectSizeN": "Tamaño del icono de efeto del token",
 				"TokenEffectSizeH": "Ajusta el tamaño de los iconos de los efectos sobre el token. Predeterminado: pequeño"
-			},
-			"Triggler": {
-				"TriggersN": "Disparadores de Triggler",
-				"TriggersH": "Un sistema de gestión de activación para los cambios de atributos de los tokens/actores"
 			}
-		},
-		"TRIGGLER": {
-			"App.AdvancedTrigger.Actor.Note": "Establece la ruta de la propiedad a utilizar para las actualizaciones del Actor--la ruta es relativa al objeto de actualización enviado al gancho updateActor.",
-			"App.AdvancedTrigger.Actor.Note2": "Opcionalmente se puede establecer una segunda propiedad para comparar la primera--esta ruta es relativa al propio objeto Actor",
-			"App.AdvancedTrigger.Token.Note": "Establece la ruta de la propiedad que se utilizará para las actualizaciones de los tokens--la ruta es relativa al objeto de actualización enviado al gancho updateToken.",
-			"App.AdvancedTrigger.Token.Note2": "Opcionalmente se puede establecer una segunda propiedad para comparar la primera--esta ruta es relativa al propio objeto Token",
-			"App.AdvancedTrigger.ActorProperty.Label": "Propiedad de la actualización del Actor",
-			"App.AdvancedTrigger.ActorProperty.Placeholder": "ej. data.attributes.hp.value (necesario si la propiedad de actualización de tokens no está establecida)",
-			"App.AdvancedTrigger.ActorProperty2.Label": "Propiedad para la comparación del Actor",
-			"App.AdvancedTrigger.ActorProperty2.Placeholder": "eg. data.data.attributes.hp.max (optional)",
-			"App.AdvancedTrigger.TokenProperty.Label": "Propiedad de la actualización del Actor Token",
-			"App.AdvancedTrigger.TokenProperty.Placeholder": "eg. actorData.attributes.hp.value (required if Actor Update Property is not set)",
-			"App.AdvancedTrigger.TokenProperty2.Label": "Propiedad para la comparación del Actor Token",
-			"App.AdvancedTrigger.TokenProperty2.Placeholder": "eg. actor.data.attributes.hp.max (opcional)",
-			"App.AdvancedTrigger.Property.Hint": "La ruta de acceso a la propiedad actualizada a la escucha. Los valores Actor y Token Entry Point indican a Triggler dónde buscar cada tipo de entidad",
-			"App.TriggerType.Simple.Label": "Disparador básico",
-			"App.TriggerType.Advanced.Label": "Disparador avanzado",
-			"App.Options.Title": "Opciones",
-			"App.SaveSuccessful": "¡Se ha guardado el disparador con éxito!",
-			"App.AdvancedTrigger.OperatorValue.Heading": "Operador/Valor",
-			"App.AdvancedTrigger.OperatorValue.Note": "Necesario. El operador y el valor se aplican tanto a las propiedades del Actor como a las del Token establecidas anteriormente",
-			"App.AdvancedTrigger.Name.Label": "Nombre del disparador",
-			"App.AdvancedTrigger.Name.Placeholder": "(necesario para los activadores avanzados)",
-			"App.AdvancedTrigger.Name.Warning": "¡El nombre es necesario para los activadores avanzados!"
 		},
 		"WORDS": {
 			"IUnderstand": "Entiendo",

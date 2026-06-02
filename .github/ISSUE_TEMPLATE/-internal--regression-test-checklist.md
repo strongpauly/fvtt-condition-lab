@@ -73,15 +73,6 @@ assignees: eclarke12
 - [ ] Pass
 (Pass/Fail notes)
 
-## Triggler
-### Detects actor properties
-- [ ] Pass
-(Pass/Fail notes)
-
-### Triggers fire on update
-- [ ] Pass
-(Pass/Fail notes)
-
 ## Pan/Select
 ### Pans on turn
 - [ ] Pass

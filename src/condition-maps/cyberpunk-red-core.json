@@ -6,8 +6,6 @@
 			"name": "Brain Injury",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/brain_injury.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesHead.oi3MEn9Y8zdbooNe]{Brain Injury}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -20,8 +18,6 @@
 			"name": "Broken Arm",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/broken_arm.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesBody.Y65igO9rtakP4qSs]{Broken Arm}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -34,8 +30,6 @@
 			"name": "Broken Jaw",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/broken_jaw.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesHead.VWmTqmsW6S5v51FO]{Broken Jaw}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -48,8 +42,6 @@
 			"name": "Broken Leg",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/broken_leg.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesBody.yBy9rlhgZeaWGtHh]{Broken Leg}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -62,8 +54,6 @@
 			"name": "Broken Ribs",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/broken_ribs.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesBody.MQpiPgEtPaIe6MJ6]{Broken Ribs}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -76,8 +66,6 @@
 			"name": "Aspyhixiating",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/asphyxiating.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -90,8 +78,6 @@
 			"name": "Collapsed Lung",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/collapsed_lung.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesBody.RAZcouFe0FS1VN1o]{Collapsed Lung}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -104,8 +90,6 @@
 			"name": "Concussion",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/concussion.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesHead.yyVVirrpH1O0DMYB]{Concussion}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -118,8 +102,6 @@
 			"name": "Cracked Skull",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/cracked_skull.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesHead.jcOCxBFrKo5oBmOy]{Cracked Skull}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -132,8 +114,6 @@
 			"name": "Crushed Fingers",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/crushed_fingers.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesBody.IKKcCgHU1lBJ4wVd]{Crushed Fingers}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -146,8 +126,6 @@
 			"name": "Crushed Windpipe",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/crushed_windpipe.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesHead.mVE8ovTniNKFs9Y7]{Crushed Windpipe}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -160,8 +138,6 @@
 			"name": "Damaged Ear",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/damaged_ear.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesHead.qoegLCfpEOQifeZq]{Damaged Eye}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -174,8 +150,6 @@
 			"name": "Damaged Eye",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/damaged_eye.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesHead.qoegLCfpEOQifeZq]{Damaged Eye}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -188,8 +162,6 @@
 			"name": "Dismembered Hand",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/dismembered_hand.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesBody.xmlFB3X2q2NAklfn]{Dismembered Hand}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -202,8 +174,6 @@
 			"name": "Dismembered Leg",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/dismembered_leg.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesBody.vRhxMWgOHYROHeHm]{Dismembered Leg}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -216,8 +186,6 @@
 			"name": "Dismembered Arm",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/dismembered_arm.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesBody.9N6yHeVwiGg2MkeL]{Dismembered Arm}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -230,8 +198,6 @@
 			"name": "Foreign Object (Body)",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/foreign_object_body.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesBody.xTQ2T50UGNY8DrHl]{Foreign Object}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -244,8 +210,6 @@
 			"name": "Foreign Object (Head)",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/foreign_object_head.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesHead.xfzYp9N5c6jEKiBR]{Foreign Object (H)}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -258,8 +222,6 @@
 			"name": "Lost Ear",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/lost_ear.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesHead.q7yxRKUMzOf9o5qO]{Lost Ear}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -272,8 +234,6 @@
 			"name": "Lost Eye",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/lost_eye.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesHead.vysFvuTpuG2aDDIz]{Lost Eye}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -286,8 +246,6 @@
 			"name": "Spinal Injury",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/spinal_injury.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesBody.pQ2F7FsQvZJyZGXe]{Spinal Injury}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -300,8 +258,6 @@
 			"name": "Torn Muscle",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/torn_muscle.svg",
 			"referenceId": "@Compendium[cyberpunk-red-core.criticalInjuriesBody.Z3iVuSFtma3Bx7SX]{Torn Muscle}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -314,8 +270,6 @@
 			"name": "Whiplash",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/whiplash.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.criticalInjuriesHead.e5wyX6r4Tem6bNwQ]{Whiplash}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -328,8 +282,6 @@
 			"name": "Blinded",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/blinded.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -342,8 +294,6 @@
 			"name": "Choking 1",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/choking1.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -356,8 +306,6 @@
 			"name": "Choking 2",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/choking2.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -370,8 +318,6 @@
 			"name": "Cover",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/cover.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -384,8 +330,6 @@
 			"name": "Deafened",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/deafened.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -398,8 +342,6 @@
 			"name": "Drowning",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/drowning.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -412,8 +354,6 @@
 			"name": "EMP",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/emp.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -426,8 +366,6 @@
 			"name": "Falling",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/falling.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -440,8 +378,6 @@
 			"name": "Grappled",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/grappled.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -454,8 +390,6 @@
 			"name": "Hidden",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/hidden.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -468,8 +402,6 @@
 			"name": "Human Shield",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/human_shield.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -482,8 +414,6 @@
 			"name": "Iron Grip",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/iron_grip.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -496,8 +426,6 @@
 			"name": "Netrunning",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/netrunning.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -510,8 +438,6 @@
 			"name": "On Fire (Mild)",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/on_fire_mild.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -524,8 +450,6 @@
 			"name": "On Fire (Strong)",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/on_fire_strong.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -538,8 +462,6 @@
 			"name": "On Fire (Deadly)",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/on_fire_deadly.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -552,8 +474,6 @@
 			"name": "Prone",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/prone.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -566,8 +486,6 @@
 			"name": "Radiation (Low)",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/radiation_low.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -580,8 +498,6 @@
 			"name": "Radiation (High)",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/radiation_high.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -594,8 +510,6 @@
 			"name": "Readied Action",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/readied_action.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -608,8 +522,6 @@
 			"name": "Suppressed",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/suppressed.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -622,8 +534,6 @@
 			"name": "Antibiotics",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/antibiotics.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.ags0aoY9ViaGvTIb]{Antibiotic}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -636,8 +546,6 @@
 			"name": "Quick Fix",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/quickfix.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -650,8 +558,6 @@
 			"name": "Rapidetox",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/rapiddetox.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.fRtXPlBcWvtgtNTf]{Rapidetox}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -664,8 +570,6 @@
 			"name": "Speed Heal",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/speedheal.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.3xF0I3J9RnSxf4Ux]{Speedheal}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -678,8 +582,6 @@
 			"name": "Stim",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/stim.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.r21n9rFplUOtnjHM]{Stim}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -692,8 +594,6 @@
 			"name": "Surge",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/surge.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.82sXoExwFlRIWesU]{Surge}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -706,8 +606,6 @@
 			"name": "Black Lace",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/black_lace.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.6BM5WFyCyIM8lZib]{Black Lace}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -720,8 +618,6 @@
 			"name": "Black Lace Addiction",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/black_lace_addiction.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.6BM5WFyCyIM8lZib]{Black Lace}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -734,8 +630,6 @@
 			"name": "Blue Glass",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/blue_glass.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.UrKzMiFp4xFOLNIC]{Blue Glass}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -748,8 +642,6 @@
 			"name": "Blue Glass Addiction",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/blue_glass_addiction.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.UrKzMiFp4xFOLNIC]{Blue Glass}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -762,8 +654,6 @@
 			"name": "Boost",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/boost.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.ut8jpew6V3q58ivX]{Boost}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -776,8 +666,6 @@
 			"name": "Boost Addiction",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/boost_addiction.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.ut8jpew6V3q58ivX]{Boost}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -790,8 +678,6 @@
 			"name": "Smash",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/smash.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.PRLDaeBVeMuBBIeO]{Smash}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -804,8 +690,6 @@
 			"name": "Smash Addicition",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/smash_addiciton.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.PRLDaeBVeMuBBIeO]{Smash}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -818,8 +702,6 @@
 			"name": "Synthcoke",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/synthcoke.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.CyYpPh89G7IYyryM]{Synthcoke}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -836,8 +718,6 @@
 			"name": "Synthcoke Addiction",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/synthcoke_addiciton.svg",
 			"referenceId": "@UUID[Compendium.cyberpunk-red-core.drugs-items.CyYpPh89G7IYyryM]{Synthcoke}",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -850,8 +730,6 @@
 			"name": "Unconcious",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/unconcious.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -864,8 +742,6 @@
 			"name": "Lightly Wounded",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/wounded_lightly.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -878,8 +754,6 @@
 			"name": "Seriously Wounded",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/wounded_seriously.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,
@@ -892,8 +766,6 @@
 			"name": "Mortally Wounded",
 			"icon": "systems/cyberpunk-red-core/icons/compendium/status/wounded_mortally.svg",
 			"referenceId": "",
-			"applyTrigger": "",
-			"removeTrigger": "",
 			"options": {
 				"overlay": false,
 				"removeOthers": false,

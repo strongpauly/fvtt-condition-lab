@@ -1,7 +1,7 @@
 import { Sidekick } from "../sidekick.js";
 
 /**
- * Enhanced Condition Trigger Config Application
+ * Enhanced Condition Option Config Application
  */
 export default class EnhancedConditionOptionConfig extends FormApplication {
 	constructor(object, options) {

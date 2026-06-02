@@ -5,7 +5,6 @@
 				"Title": "チャットにすべての状態異常を出力しますか？",
 				"Content": "「はい」ですべての状態異常が設定関係なくチャットに出力されます。"
 			},
-
 			"GameSystemNotSupported": "CUB Enhanced Conditions does not work with this game system. Please check the CUB Wiki for more info",
 			"SimpleIconsNotSupported": "CUB Enhanced Conditions does not support game systems that use simple status effect icons.",
 			"MapMismatch": "このマッピングは現在のゲームシステムと一致しないため、期待どおりに動作しない可能性があります。",
@@ -13,19 +12,15 @@
 			"ApplyCondition.Failed.NoCondition": "状態の適用に失敗しました。該当する状態が存在しません。",
 			"ApplyCondition.Failed.NoIcon": "状態の適用に失敗しました。該当するアイコンが存在しません。",
 			"ApplyCondition.Failed.AlreadyActive": "は、すでに有効化されています。状態の適用に失敗しました。",
-
 			"GetConditions.Failed.NoToken": "状態の取得に失敗しました。提供されたエンティティがなく、自動では見つかりませんでした。",
 			"GetConditions.Failed.NoCondition": "状態の取得に失敗しました。状態マッピングが存在しません。",
 			"GetConditions.Failed.NoResults": "状態の取得に失敗しました。アクターまたはコマに状態が存在しません。",
-
 			"RemoveCondition.Failed.NoToken": "状態の削除に失敗しました。該当するコマがありません。",
 			"RemoveCondition.Failed.NoCondition": "状態の削除に失敗しました。次の名前の状態は存在しません。：",
 			"RemoveCondition.Failed.NoIcon": "状態の削除に失敗しました。該当するアイコンが存在しません。",
 			"RemoveCondition.Failed.NotActive": "は、このコマでは有効ではありません。状態の削除に失敗しました。",
-
 			"RemoveAllConditions.Failed.NoToken": "状態の削除に失敗しました。該当するコマがありません。",
 			"RemoveAllConditions.Failed.NoCondition": "状態の削除に失敗しました。有効な状態マッピングが存在しません。",
-
 			"Lab.Title": "コンディションラボ",
 			"Lab.Hint": "状態をカスタマイズし、アイコンに割り当てる機能を提供します。",
 			"Lab.MappingType.Label": "マッピングの種別",
@@ -56,11 +51,9 @@
 			"PreventativeSaveReminder.Title": "CUB - 拡張状態管理｜予防的保存リマインダー",
 			"PreventativeSaveReminder.Content": "<p><i>アクティブ効果</i>への移行に伴う問題を防ぐため、<strong>「コンディションラボ」</strong>を開き<strong>「セーブマッピング」</strong>ボタンをクリックしてください（CUB v1.3.0以後に保存を行っていない場合）。</p><p>これにより状態設定が正しく変換されます。</p>",
 			"PreventativeSaveReminder.Suppress": "以後、このリマインダーを表示しない",
-
 			"ChatCard.Title.Active": "継続中",
 			"ChatCard.Title.Added": "状態追加",
 			"ChatCard.Title.Removed": "状態削除",
-
 			"ChatCard.Buttons.Undo": "状態削除を取り消す",
 			"ChatCard.Buttons.Remove": "状態を削除する"
 		},
@@ -92,35 +85,7 @@
 			"TokenUtility": {
 				"TokenEffectSizeN": "状態アイコンのサイズ",
 				"TokenEffectSizeH": "コマに表示される状態アイコンの大きさを設定します。デフォルト：Small"
-			},
-			"Triggler": {
-				"TriggersN": "トリガー設定",
-				"TriggersH": "コマやアクターの属性を変更するトリガー管理を行います。"
 			}
-		},
-		"TRIGGLER": {
-			"App.AdvancedTrigger.Actor.Note": "アクターの更新に使用するプロパティパスを指定します。パスは updateActor フックに渡される更新オブジェクトからの相対パスです。",
-			"App.AdvancedTrigger.Actor.Note2": "オプションとして、最初のプロパティと比較するための2つ目のプロパティを設定します。このパスはアクターオブジェクト自体からの相対パスです。",
-			"App.AdvancedTrigger.Token.Note": "トークンの更新に使用するプロパティパスを指定します。パスは updateToken フックに渡される更新オブジェクトからの相対パスです。",
-			"App.AdvancedTrigger.Token.Note2": "オプションとして、最初のプロパティと比較するための2つ目のプロパティを設定します。このパスはトークンオブジェクト自体からの相対パスです。",
-			"App.AdvancedTrigger.ActorProperty.Label": "アクター更新プロパティ",
-			"App.AdvancedTrigger.ActorProperty.Placeholder": "例：data.attributes.hp.value（トークン更新プロパティが設定されていない場合は必須）。",
-			"App.AdvancedTrigger.ActorProperty2.Label": "アクター比較プロパティ",
-			"App.AdvancedTrigger.ActorProperty2.Placeholder": "例：data.data.attributes.hp.max（オプション）",
-			"App.AdvancedTrigger.TokenProperty.Label": "トークン更新プロパティ",
-			"App.AdvancedTrigger.TokenProperty.Placeholder": "例：actorData.attributes.hp.value（アクター更新プロパティが設定されていない場合は必須）",
-			"App.AdvancedTrigger.TokenProperty2.Label": "トークン比較プロパティ",
-			"App.AdvancedTrigger.TokenProperty2.Placeholder": "例：actor.data.attributes.hp.max（オプション）",
-			"App.AdvancedTrigger.Property.Hint": "監視する更新プロパティへのパス。アクターとトークンのエントリーポイントの値は、それぞれのエンティティタイプをどこで探すかをトリガーに伝えます。",
-			"App.TriggerType.Simple.Label": "シンプルトリガー",
-			"App.TriggerType.Advanced.Label": "高度なトリガー",
-			"App.Options.Title": "オプション",
-			"App.SaveSuccessful": "トリガーの保存に成功しました！",
-			"App.AdvancedTrigger.OperatorValue.Heading": "演算子/値",
-			"App.AdvancedTrigger.OperatorValue.Note": "常に必須。演算子と値は、上で設定したアクターとトークンの両方のプロパティに適用されます。",
-			"App.AdvancedTrigger.Name.Label": "トリガー名",
-			"App.AdvancedTrigger.Name.Placeholder": "（高度なトリガーには必須）",
-			"App.AdvancedTrigger.Name.Warning": "高度なトリガーには名前が必要です！"
 		},
 		"WORDS": {
 			"IUnderstand": "了解しました",

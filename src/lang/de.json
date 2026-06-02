@@ -43,13 +43,6 @@
 				"Description": "Makro wählen, das ausgeführt werden soll, wenn dieser Zustand zu einer Spielfigur/einem Akteur hinzugefügt oder entfernt wird",
 				"SelectNone": "--Kein Makro--"
 			},
-			"TriggerConfig": {
-				"Heading": "Trigger",
-				"ApplyHeading": "Hinzufügen-Trigger",
-				"RemoveHeading": "Entfernen-Trigger",
-				"Description": "Trigger, die diesen Zustand hinzufügen oder entfernen",
-				"SelectNone": "--Kein Trigger--"
-			},
 			"OptionConfig": {
 				"Heading": "Optionen",
 				"Description": "Generelle Optionen für diesen Zustand",
@@ -71,7 +64,6 @@
 				},
 				"SaveNote": "Hinweis: 'Speichern' wird die Zuordnung für das Condition Lab speichern"
 			},
-
 			"GameSystemNotSupported": "CUB Verbesserte Zustände funktionieren nicht mit diesem Spielsystem. Bitte sieh ins CUB Wiki für weitere Informationen!",
 			"SimpleIconsNotSupported": "CUB Verbesserte Zustände unterstützen keine Spielsysteme, die einfache Statuseffekt-Icons verwenden.",
 			"MapMismatch": "Diese Zuordnung passt nicht zu deinem Spielsystem und funktioniert möglicherweise nicht wie erwartet.",
@@ -155,19 +147,7 @@
 			"TokenUtility": {
 				"TokenEffectSizeN": "Icongröße für Spielfigur-Effekte",
 				"TokenEffectSizeH": "Legt die Größe für Effekticons auf Spielfiguren fest. Zahlen geben die Anzahl der anzuzeigenden Effektsymbole an (X * Y). Voreinstellung: Small - 5x5"
-			},
-			"Triggler": {
-				"TriggersN": "Triggler-Trigger",
-				"TriggersH": "Speichert gespeicherte Triggler-Trigger."
 			}
-		},
-		"TRIGGLER": {
-			"App.TriggerType.Simple.Label": "Einfacher Trigger",
-			"App.TriggerType.Advanced.Label": "Erweiterter Trigger",
-			"App.Options.Title": "Optionen",
-			"App.SaveSuccessful": "Trigger erfolgreich gespeichert!",
-			"App.AdvancedTrigger.OperatorValue.Heading": "Operator/Wert",
-			"App.AdvancedTrigger.Name.Label": "Trigger-Name"
 		},
 		"WORDS": {
 			"Icon": "Icon",
