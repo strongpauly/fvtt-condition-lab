@@ -428,6 +428,17 @@ export class EnhancedConditions {
 			const coreEffects =
 				CONFIG.defaultStatusEffects || game.clt.CoreStatusEffects;
 
+			// Foundry's token HUD sorts status effects by `(a.order - b.order) || title`.
+			// Some systems (e.g. dnd5e) assign an explicit `order` to every core effect, so
+			// our effects (which have none, defaulting to 0) would all sort ahead of them.
+			// Match the core effects' largest order so our conditions fall into the same
+			// "general" bucket and get sorted alphabetically alongside them.
+			const coreOrders = coreEffects.map((e) => e.order).filter((o) => o != null);
+			if (coreOrders.length) {
+				const defaultOrder = Math.max(...coreOrders);
+				for (const effect of activeConditionEffects) effect.order ??= defaultOrder;
+			}
+
 			// Create a Set based on the core status effects and the Enhanced Condition effects. Using a Set ensures unique icons only
 			CONFIG.statusEffects = coreEffects.concat(activeConditionEffects);
 		}
