@@ -188,16 +188,4 @@ export function registerSettings() {
 		type: Boolean,
 		default: false
 	});
-
-	/* -------------------------------------------- */
-
-	game.settings.register("condition-lab", "sceneControls", {
-		name: "CLT.SETTINGS.SceneControls.Name",
-		hint: "CLT.SETTINGS.SceneControls.Hint",
-		scope: "world",
-		type: Boolean,
-		default: false,
-		config: true,
-		requiresReload: true
-	});
 }

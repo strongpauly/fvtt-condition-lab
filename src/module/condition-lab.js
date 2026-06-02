@@ -19,17 +19,8 @@ import { ConditionLab } from "./enhanced-conditions/condition-lab.js";
 
 /* ------------------- Init ------------------- */
 
-Hooks.on("i18nInit", () => {
-	registerSettings();
-
-	// Assign the namespace Object if it already exists or instantiate it as an object if not
-	game.clt = EnhancedConditions;
-	ui.clt = {};
-
-	// Execute housekeeping
-	Sidekick.loadTemplates();
-
-	// Keybinds
+Hooks.on("init", () => {
+	// Keybinds must be registered during the init hook
 	game.keybindings.register("condition-lab", "openConditionLab", {
 		name: "CLT.KEYBINDINGS.openConditionLab.name",
 		onDown: () => {
@@ -95,6 +86,17 @@ Hooks.on("i18nInit", () => {
 			"OVERRIDE"
 		);
 	}
+});
+
+Hooks.on("i18nInit", () => {
+	registerSettings();
+
+	// Assign the namespace Object if it already exists or instantiate it as an object if not
+	game.clt = EnhancedConditions;
+	ui.clt = {};
+
+	// Execute housekeeping
+	Sidekick.loadTemplates();
 });
 
 Hooks.on("ready", async () => {
@@ -221,22 +223,6 @@ Hooks.on("updateCombat", (combat, update, options, userId) => {
 	if (!chatConditions.length) return;
 
 	EnhancedConditions.outputChatMessage(token, chatConditions, { type: "active" });
-});
-
-/* -------------- Scene Controls -------------- */
-Hooks.on("getSceneControlButtons", function (hudButtons) {
-	if (game.user.isGM && game.settings.get("condition-lab", "sceneControls")) {
-		const hud = $(hudButtons).find((val) => val.name === "token");
-		if (hud) {
-			hud.tools.push({
-				name: "CLT.ENHANCED_CONDITIONS.Lab.Title",
-				title: "CLT.ENHANCED_CONDITIONS.Lab.Title",
-				icon: "fas fa-flask",
-				button: true,
-				onClick: async () => new ConditionLab().render(true)
-			});
-		}
-	}
 });
 
 /* ------------------- Chat ------------------- */

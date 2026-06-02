@@ -608,7 +608,7 @@ export class ConditionLab extends FormApplication {
 		if (!conditionEffect) return;
 
 		if (!foundry.utils.hasProperty(conditionEffect, "flags.condition-lab.conditionId")) {
-			setProperty(
+			foundry.utils.setProperty(
 				conditionEffect,
 				"flags.condition-lab.conditionId",
 				conditionId

@@ -200,7 +200,7 @@ export class EnhancedConditions {
 			await ChatMessage.create({
 				speaker,
 				content,
-				type: chatType,
+				style: chatType,
 				user: chatUser
 			});
 		}
@@ -356,6 +356,8 @@ export class EnhancedConditions {
 		for (const condition of conditionMap) {
 			condition.options = condition.options || {};
 			if (condition.options.outputChat === undefined) condition.options.outputChat = outputChatSetting;
+			// Normalise the legacy `icon` property to `img` used by status effects
+			condition.img ??= condition.icon;
 			preparedMap.push(condition);
 		}
 
@@ -444,7 +446,9 @@ export class EnhancedConditions {
 
 		const statusEffects = conditionMap.map((c) => {
 			const id = c.id || Sidekick.createId(existingIds);
-			const { activeEffect, duration, img, name, options } = c;
+			const { activeEffect, duration, name, options } = c;
+			// Fall back to the legacy `icon` property when `img` is not set (e.g. fresh default maps)
+			const img = c.img ?? c.icon;
 
 			return {
 				id,

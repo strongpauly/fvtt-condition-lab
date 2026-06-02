@@ -201,10 +201,6 @@
 						"xLarge": "Extra Large - 2x2"
 					}
 				}
-			},
-			"SceneControls": {
-				"Name": "Scene Controls Shortcuts",
-				"Hint": "Adds a button to the Token Controls to open the Condition Lab window. Note that you can also open it by setting a keybinding instead of using this setting."
 			}
 		},
 		"WORDS": {

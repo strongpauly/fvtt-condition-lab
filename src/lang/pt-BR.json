@@ -201,10 +201,6 @@
             "xLarge": "Extra Grande - 2x2"
           }
         }
-      },
-      "SceneControls": {
-        "Name": "Atalhos de Controles de Cena",
-        "Hint": "Adiciona um botão aos Controles de Token para abrir a janela do Condition Lab. Note que você também pode abri-la definindo uma combinação de teclas em vez de usar essa configuração."
       }
     },
     "WORDS": {
