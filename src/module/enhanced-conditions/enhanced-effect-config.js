@@ -6,8 +6,9 @@ export default class EnhancedEffectConfig extends foundry.applications.sheets.Ac
 
 	/**
 	 * Override default update object behaviour
-	 * @param {*} event
-	 * @param {*} formData
+	 * @param {*} _event
+	 * @param {*} form
+	 * @param {*} data
 	 * @override
 	 */
 	async _processSubmitData(_event, form, data) {
