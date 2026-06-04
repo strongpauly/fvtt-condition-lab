@@ -123,6 +123,6 @@ jobs:
         uses: strongpauly/foundry-package-release-action@main
         with:
           actionToken: ${{ secrets.GITHUB_TOKEN }}
-          manifestFileName: 'dist/${{ env.package_type }}.json'
+          manifestFileName: '${{ env.package_type }}.json'
           foundryToken: ${{ secrets.FOUNDRY_PACKAGE_RELEASE_TOKEN }}
           dryRun: false
