@@ -82,15 +82,11 @@
 	],
 	"styles": ["styles/condition-lab.css"],
 	"compatibility": {
-		"minimum": "13",
-		"verified": "13"
+		"minimum": "14",
+		"verified": "14"
 	},
 	"relationships": {
 		"conflicts": [
-			{
-				"id": "dnd5e",
-				"type": "system"
-			},
 			{
 				"id": "succ",
 				"type": "module"
