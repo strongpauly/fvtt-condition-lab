@@ -164,7 +164,7 @@ export class EnhancedConditions {
 			let newContent = "";
 			for (const condition of conditions) {
 				condition.name = game.i18n.localize(condition.name);
-				const newRow = await renderTemplate(
+				const newRow = await foundry.applications.handlebars.renderTemplate(
 					"modules/condition-lab/templates/partials/chat-card-condition-list.hbs",
 					{ condition, type, timestamp }
 				);
@@ -192,7 +192,7 @@ export class EnhancedConditions {
 				isOwner: entity.isOwner || game.user.isGM
 			};
 
-			const content = await renderTemplate(
+			const content = await foundry.applications.handlebars.renderTemplate(
 				"modules/condition-lab/templates/chat-conditions.hbs",
 				templateData
 			);

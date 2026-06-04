@@ -354,7 +354,7 @@ export class ConditionLab extends FormApplication {
 	async _importFromJSONDialog() {
 		new Dialog({
 			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle"),
-			content: await renderTemplate("modules/condition-lab/templates/import-conditions.html", {}),
+			content: await foundry.applications.handlebars.renderTemplate("modules/condition-lab/templates/import-conditions.html", {}),
 			buttons: {
 				import: {
 					icon: '<i class="fas fa-file-import"></i>',

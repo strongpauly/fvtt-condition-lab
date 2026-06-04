@@ -52,7 +52,7 @@ Hooks.on("init", () => {
 		};
 		libWrapper.register(
 			"condition-lab",
-			"Token.prototype._refreshEffects",
+			"foundry.canvas.placeables.Token.prototype._refreshEffects",
 			function () {
 				const effectSize = game.settings.get("condition-lab", "effectSize");
 				// Use the default values if no setting found
@@ -231,7 +231,7 @@ Hooks.on("renderChatLog", (app, html, data) => {
 	EnhancedConditions.updateConditionTimestamps();
 });
 
-Hooks.on("renderChatMessage", (app, html, data) => {
+Hooks.on("renderChatMessageHTML", (message, html, data) => {
 	if (data.message.content && !data.message.content.match("enhanced-conditions")) {
 		return;
 	}

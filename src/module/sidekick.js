@@ -130,7 +130,7 @@ export class Sidekick {
 			"modules/condition-lab/templates/partials/chat-card-condition-list.hbs",
 			"modules/condition-lab/templates/partials/condition-lab-row.hbs"
 		];
-		await loadTemplates(templates);
+		await foundry.applications.handlebars.loadTemplates(templates);
 	}
 
 	/**
