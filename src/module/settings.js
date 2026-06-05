@@ -18,16 +18,18 @@ export function registerSettings() {
 		default: false,
 		onChange: (s) => {
 			if (s === true) {
-				Dialog.confirm({
-					title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Title"),
-					content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Content"),
-					yes: () => {
-						const newMap = foundry.utils.deepClone(game.clt.conditions);
-						if (!newMap.length) return;
-						newMap.forEach((c) => (c.options.outputChat = true));
-						game.settings.set("condition-lab", "activeConditionMap", newMap);
+				foundry.applications.api.DialogV2.confirm({
+					window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Title") },
+					content: `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Content")}</p>`,
+					yes: {
+						callback: () => {
+							const newMap = foundry.utils.deepClone(game.clt.conditions);
+							if (!newMap.length) return;
+							newMap.forEach((c) => (c.options.outputChat = true));
+							game.settings.set("condition-lab", "activeConditionMap", newMap);
+						}
 					},
-					no: () => { }
+					no: { callback: () => {} }
 				});
 			}
 		}

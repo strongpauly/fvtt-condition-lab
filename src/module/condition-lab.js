@@ -24,7 +24,7 @@ Hooks.on("init", () => {
 	game.keybindings.register("condition-lab", "openConditionLab", {
 		name: "CLT.KEYBINDINGS.openConditionLab.name",
 		onDown: () => {
-			new ConditionLab().render(true);
+			new ConditionLab().render({ force: true });
 		},
 		restricted: true,
 		precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL
@@ -287,21 +287,6 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
 	});
 });
 
-Hooks.on("renderDialog", (app, html, data) => {
-	switch (app.title) {
-		case game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Title"):
-			ConditionLab._onRenderSaveDialog(app, html, data);
-			break;
-
-		case game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsTitle"):
-			ConditionLab._onRenderRestoreDefaultsDialog(app, html, data);
-			break;
-
-		default:
-			break;
-	}
-});
-
 /* -------------- Combat Tracker -------------- */
 
 Hooks.on("renderCombatTracker", (app, html, data) => {
@@ -320,8 +305,3 @@ Hooks.on("renderCombatTracker", (app, html, data) => {
 		});
 });
 
-/* ---------------- Custom Apps --------------- */
-
-Hooks.on("renderConditionLab", (app, html, data) => {
-	ConditionLab._onRender(app, $(html), data);
-});

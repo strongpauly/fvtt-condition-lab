@@ -4,14 +4,17 @@ import EnhancedConditionOptionConfig from "./enhanced-condition-option.js";
 import { EnhancedConditions } from "./enhanced-conditions.js";
 import EnhancedEffectConfig from "./enhanced-effect-config.js";
 
+const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
+const { DragDrop, FormDataExtended } = foundry.applications.ux;
+
 /**
- * Form application for managing mapping of Conditions to Icons and JournalEntries
+ * Application for managing mapping of Conditions to Icons and JournalEntries
  */
-export class ConditionLab extends FormApplication {
-	constructor(object, options = {}) {
-		super(object, options);
+export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
+	constructor(options = {}) {
+		super(options);
 		game.clt.conditionLab = this;
-		this.data = (game.clt.conditionLab ? game.clt.conditionLab.data : object) ?? null;
+		this.data = null;
 		this.system = game.system.id;
 		this.initialMapType = game.settings.get("condition-lab", "conditionMapType");
 		this.mapType = null;
@@ -21,20 +24,63 @@ export class ConditionLab extends FormApplication {
 		this.maps = game.settings.get("condition-lab", "defaultConditionMaps");
 		this.filterValue = "";
 		this.sortDirection = "";
+		this.#dragDrop = this.#createDragDropHandlers();
 	}
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			id: "cub-condition-lab",
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.Title"),
-			template: "modules/condition-lab/templates/condition-lab.hbs",
-			classes: ["sheet", "condition-lab-form"],
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		id: "cub-condition-lab",
+		classes: ["sheet", "condition-lab-form"],
+		tag: "form",
+		position: {
 			width: 780,
-			height: 680,
-			resizable: true,
-			closeOnSubmit: false,
-			scrollY: ["ol.condition-lab"],
-			dragDrop: [{ dropSelector: "div.text-entry.reference" }]
+			height: 680
+		},
+		window: {
+			title: "CLT.ENHANCED_CONDITIONS.Lab.Title",
+			icon: "fas fa-flask",
+			resizable: true
+		},
+		form: {
+			handler: ConditionLab.#onSubmitForm,
+			submitOnChange: false,
+			closeOnSubmit: false
+		},
+		actions: {
+			import: ConditionLab.#onImport,
+			export: ConditionLab.#onExport
+		},
+		dragDrop: [{ dropSelector: "div.text-entry.reference" }]
+	};
+
+	/** @override */
+	static PARTS = {
+		form: {
+			template: "modules/condition-lab/templates/condition-lab.hbs",
+			scrollable: ["ol.condition-lab"]
+		}
+	};
+
+	/**
+	 * Drag-drop handler instances
+	 * @type {DragDrop[]}
+	 */
+	#dragDrop;
+
+	/**
+	 * Create drag-drop handlers from the configured options
+	 * @returns {DragDrop[]}
+	 */
+	#createDragDropHandlers() {
+		return (this.options.dragDrop ?? []).map((d) => {
+			d.permissions = {
+				dragstart: () => false,
+				drop: () => true
+			};
+			d.callbacks = {
+				drop: this._onDrop.bind(this)
+			};
+			return new DragDrop.implementation(d);
 		});
 	}
 
@@ -50,9 +96,11 @@ export class ConditionLab extends FormApplication {
 
 	/**
 	 * Gets data for the template render
+	 * @param {object} options
 	 * @returns {object}
 	 */
-	async getData() {
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		const sortDirection = this.sortDirection;
 		const sortTitle = game.i18n.localize(
 			`CLT.ENHANCED_CONDITIONS.ConditionLab.SortAnchorTitle.${sortDirection ? sortDirection : "unsorted"}`
@@ -122,7 +170,7 @@ export class ConditionLab extends FormApplication {
 		}
 
 		// Prepare final data object for template
-		const data = {
+		Object.assign(context, {
 			sortTitle,
 			sortDirection,
 			filterTitle,
@@ -135,10 +183,10 @@ export class ConditionLab extends FormApplication {
 			isDefault,
 			disableChatOutput,
 			unsavedMap
-		};
+		});
 
-		this.data = data;
-		return data;
+		this.data = context;
+		return context;
 	}
 
 	/**
@@ -147,12 +195,13 @@ export class ConditionLab extends FormApplication {
 	 */
 	_buildSubmitData() {
 		const map = this.sortDirection ? this._sortMapByName(this.map) : this.map;
-		const data =
+		const idData =
 			map?.reduce((acc, entry, index) => {
 				acc[`id-${index}`] = entry.id;
 				return acc;
 			}, {}) ?? {};
-		return this._getSubmitData(data);
+		const formData = this.element ? new FormDataExtended(this.element).object : {};
+		return foundry.utils.mergeObject(formData, idData);
 	}
 
 	/**
@@ -259,7 +308,7 @@ export class ConditionLab extends FormApplication {
 
 		// If the mapType is other then the map should be empty, otherwise it's the default map for the system
 		this.map = tempMap;
-		this.render(true);
+		this.render();
 	}
 
 	/**
@@ -271,17 +320,22 @@ export class ConditionLab extends FormApplication {
 		const showDialogSetting = game.settings.get("condition-lab", "showSortDirectionDialog");
 
 		if (this.sortDirection && showDialogSetting) {
-			await Dialog.confirm({
-				title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Title"),
-				content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Content"),
-				yes: ($html) => {
-					const checkbox = $html[0].querySelector("input[name='dont-show-again']");
-					if (checkbox.checked) {
-						game.settings.set("condition-lab", "showSortDirectionDialog", false);
+			await DialogV2.confirm({
+				window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Title") },
+				content: `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Content")}</p>
+				<div class="form-group"><label class="dont-show-again-checkbox">${game.i18n.localize(
+		"CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.CheckboxText"
+	)}<input type="checkbox" name="dont-show-again"></label></div>`,
+				yes: {
+					callback: (event, button) => {
+						const checkbox = button.form.elements["dont-show-again"];
+						if (checkbox?.checked) {
+							game.settings.set("condition-lab", "showSortDirectionDialog", false);
+						}
+						this._processFormUpdate(formData);
 					}
-					this._processFormUpdate(formData);
 				},
-				no: () => { }
+				no: { callback: () => {} }
 			});
 		} else {
 			this._processFormUpdate(formData);
@@ -329,7 +383,7 @@ export class ConditionLab extends FormApplication {
 		this.sortDirection = "";
 
 		ui.notifications.info(game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.SaveSuccess"));
-		this.render(true);
+		this.render();
 	}
 
 	/**
@@ -352,34 +406,37 @@ export class ConditionLab extends FormApplication {
 	 * Borrowed from foundry.js Entity class
 	 */
 	async _importFromJSONDialog() {
-		new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle"),
-			content: await foundry.applications.handlebars.renderTemplate("modules/condition-lab/templates/import-conditions.html", {}),
-			buttons: {
-				import: {
-					icon: '<i class="fas fa-file-import"></i>',
+		const content = await foundry.applications.handlebars.renderTemplate(
+			"modules/condition-lab/templates/import-conditions.html",
+			{}
+		);
+
+		new DialogV2({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle") },
+			content,
+			buttons: [
+				{
+					action: "import",
+					icon: "fas fa-file-import",
 					label: game.i18n.localize("CLT.WORDS.Import"),
-					callback: (html) => {
-						this._processImport(html);
-					}
+					default: true,
+					callback: (event, button) => this._processImport(button.form)
 				},
-				no: {
-					icon: '<i class="fas fa-times"></i>',
+				{
+					action: "cancel",
+					icon: "fas fa-times",
 					label: game.i18n.localize("Cancel")
 				}
-			},
-			default: "import"
-		}).render(true);
+			]
+		}).render({ force: true });
 	}
 
 	/**
 	 * Process a Condition Map Import
-	 * @param {*} html
+	 * @param {HTMLFormElement} form
 	 * @returns {*}
 	 */
-	async _processImport(html) {
-		const form = html.find("form")[0];
-
+	async _processImport(form) {
 		if (!form.data.files.length) {
 			return ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.Import.NoFile"));
 		}
@@ -398,76 +455,52 @@ export class ConditionLab extends FormApplication {
 	}
 
 	/** @override */
-	_getHeaderButtons() {
-		let buttons = super._getHeaderButtons();
-
-		buttons.unshift(
+	_getHeaderControls() {
+		const controls = super._getHeaderControls();
+		return [
 			{
-				label: game.i18n.localize("CLT.WORDS.Import"),
-				class: "import",
+				action: "import",
 				icon: "fas fa-file-import",
-				onclick: async (ev) => {
-					this._importFromJSONDialog();
-				}
+				label: "CLT.WORDS.Import"
 			},
 			{
-				label: game.i18n.localize("CLT.WORDS.Export"),
-				class: "export",
+				action: "export",
 				icon: "fas fa-file-export",
-				onclick: async (ev) => {
-					this._exportToJSON();
-				}
-			}
-		);
-
-		return buttons;
+				label: "CLT.WORDS.Export"
+			},
+			...controls
+		];
 	}
 
 	/* -------------------------------------------- */
-	/*                 Hook Handlers                */
+	/*                Action Handlers               */
 	/* -------------------------------------------- */
 
 	/**
-	 * Condition Lab Render handler
-	 * @param {*} app
-	 * @param {*} html
-	 * @param {*} data
+	 * Header control handler to open the import dialog
+	 * @this {ConditionLab}
 	 */
-	static _onRender(app, html, data) {
-		ui.clt.conditionLab = app;
+	static #onImport() {
+		this._importFromJSONDialog();
 	}
 
 	/**
-	 * Render save dialog hook handler
-	 * @param {*} app
-	 * @param {jQuery} html
-	 * @param {*} data
+	 * Header control handler to export the current map
+	 * @this {ConditionLab}
 	 */
-	static _onRenderSaveDialog(app, html, data) {
-		const contentDiv = html[0].querySelector("div.dialog-content");
-		const checkbox = `<div class="form-group"><label class="dont-show-again-checkbox">${game.i18n.localize(
-			"CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.CheckboxText"
-		)}<input type="checkbox" name="dont-show-again"></label></div>`;
-		contentDiv.insertAdjacentHTML("beforeend", checkbox);
-		app.setPosition({ height: app.position.height + 32 });
+	static #onExport() {
+		this._exportToJSON();
 	}
 
 	/**
-	 * Render restore defaults hook handler
-	 * @param {*} app
-	 * @param {*} html
-	 * @param {*} data
+	 * Form submission handler
+	 * @this {ConditionLab}
+	 * @param {SubmitEvent} event
+	 * @param {HTMLFormElement} form
+	 * @param {FormDataExtended} formData
 	 */
-	static _onRenderRestoreDefaultsDialog(app, html, data) {
-		if (game.clt.conditionLab.mapType !== "default") return;
-
-		const contentDiv = html[0].querySelector("div.dialog-content");
-		const checkbox = `<div class="form-group">
-		<label>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.RestoreDefaultClearCache.CheckboxText")}</label>
-		<input type="checkbox" name="clear-cache">
-		</div>`;
-		contentDiv.insertAdjacentHTML("beforeend", checkbox);
-		app.setPosition({ height: app.position.height + 32 });
+	static #onSubmitForm(event, form, formData) {
+		return this._updateObject(event, formData.object);
 	}
 
 	/* -------------------------------------------- */
@@ -475,40 +508,35 @@ export class ConditionLab extends FormApplication {
 	/* -------------------------------------------- */
 
 	/** @override */
-	activateListeners(html) {
-		const inputs = html.find("input");
-		const mapTypeSelector = html.find("select[class='map-type']");
-		const activeEffectButton = html.find("button.active-effect-config");
-		const addRowAnchor = html.find("a[name='add-row']");
-		const removeRowAnchor = html.find("a[class='remove-row']");
-		const changeOrderAnchor = html.find(".row-controls a.move-up, .row-controls a.move-down");
-		const restoreDefaultsButton = html.find("button[class='restore-defaults']");
-		const resetFormButton = html.find("button[name='reset']");
-		const filterInput = html.find("input[name='filter-list']");
-		const sortButton = html.find("a.sort-list");
-		const macroConfigButton = html.find("button.macro-config");
-		const optionConfigButton = html.find("button.option-config");
+	_onRender(context, options) {
+		super._onRender(context, options);
+		ui.clt.conditionLab = this;
 
-		inputs.on("change", (event) => this._onChangeInputs(event));
-		mapTypeSelector.on("change", (event) => this._onChangeMapType(event));
-		activeEffectButton.on("click", (event) => this._onClickActiveEffectConfig(event));
-		addRowAnchor.on("click", async (event) => this._onAddRow(event));
-		removeRowAnchor.on("click", async (event) => this._onRemoveRow(event));
-		changeOrderAnchor.on("click", (event) => this._onChangeSortOrder(event));
-		restoreDefaultsButton.on("click", async (event) => this._onRestoreDefaults(event));
-		resetFormButton.on("click", (event) => this._onResetForm(event));
-		filterInput.on("input", (event) => this._onChangeFilter(event));
-		sortButton.on("click", (event) => this._onClickSortButton(event));
-		macroConfigButton.on("click", (event) => this._onClickMacroConfig(event));
-		optionConfigButton.on("click", (event) => this._onClickOptionConfig(event));
+		const html = this.element;
 
-		super.activateListeners(html);
-	}
+		html.querySelectorAll("input").forEach((el) => el.addEventListener("change", (event) => this._onChangeInputs(event)));
+		html.querySelector("select.map-type")?.addEventListener("change", (event) => this._onChangeMapType(event));
+		html.querySelectorAll("button.active-effect-config").forEach((el) =>
+			el.addEventListener("click", (event) => this._onClickActiveEffectConfig(event))
+		);
+		html.querySelector("a[name='add-row']")?.addEventListener("click", (event) => this._onAddRow(event));
+		html.querySelectorAll("a.remove-row").forEach((el) => el.addEventListener("click", (event) => this._onRemoveRow(event)));
+		html.querySelectorAll(".row-controls a.move-up, .row-controls a.move-down").forEach((el) =>
+			el.addEventListener("click", (event) => this._onChangeSortOrder(event))
+		);
+		html.querySelector("button.restore-defaults")?.addEventListener("click", (event) => this._onRestoreDefaults(event));
+		html.querySelector("button[name='reset']")?.addEventListener("click", (event) => this._onResetForm(event));
+		html.querySelector("input[name='filter-list']")?.addEventListener("input", (event) => this._onChangeFilter(event));
+		html.querySelector("a.sort-list")?.addEventListener("click", (event) => this._onClickSortButton(event));
+		html.querySelectorAll("button.macro-config-button").forEach((el) =>
+			el.addEventListener("click", (event) => this._onClickMacroConfig(event))
+		);
+		html.querySelectorAll("button.option-config").forEach((el) =>
+			el.addEventListener("click", (event) => this._onClickOptionConfig(event))
+		);
+		html.querySelectorAll("img[data-edit]").forEach((el) => el.addEventListener("click", this._onEditImage.bind(this)));
 
-	/** @override */
-	_activateCoreListeners(html) {
-		super._activateCoreListeners(html);
-		if (this.isEditable) html.find("img[data-edit]").on("click", this._onEditImage.bind(this));
+		this.#dragDrop.forEach((d) => d.bind(html));
 	}
 
 	/**
@@ -537,7 +565,7 @@ export class ConditionLab extends FormApplication {
 
 		this.displayedRowIds = this.displayedMap.filter((r) => !r.hidden).map((r) => r.id);
 
-		const conditionRowEls = this._element[0].querySelectorAll("li.row");
+		const conditionRowEls = this.element.querySelectorAll("li.row");
 		for (const el of conditionRowEls) {
 			const conditionId = el.dataset.conditionId;
 			if (this.displayedRowIds.includes(conditionId)) {
@@ -564,8 +592,7 @@ export class ConditionLab extends FormApplication {
 	 */
 	async _onChangeMapType(event) {
 		event.preventDefault();
-		const selection = $(event.target).find("option:selected");
-		const newType = (this.mapType = selection.val());
+		const newType = (this.mapType = event.target.value);
 
 		switch (newType) {
 			case "default":
@@ -629,7 +656,7 @@ export class ConditionLab extends FormApplication {
 			return true;
 		};
 
-		new EnhancedEffectConfig(effect).render(true);
+		new EnhancedEffectConfig({ document: effect }).render({ force: true });
 	}
 
 	/**
@@ -690,37 +717,24 @@ export class ConditionLab extends FormApplication {
 	 * Handler for remove row event
 	 * @param {*} event
 	 */
-	_onRemoveRow(event) {
+	async _onRemoveRow(event) {
 		event.preventDefault();
 
 		this.map = this.updatedMap;
 
 		const row = event.currentTarget.name.match(/\d+$/)[0];
 
-		const dialog = new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ConfirmDeleteTitle"),
-			content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ConfirmDeleteContent"),
-			buttons: {
-				yes: {
-					icon: '<i class="fa fa-check"></i>',
-					label: game.i18n.localize("Yes"),
-					callback: async (event) => {
-						const newMap = foundry.utils.duplicate(this.map);
-						newMap.splice(row, 1);
-						this.map = newMap;
-						this.render();
-					}
-				},
-				no: {
-					icon: '<i class="fa fa-times"></i>',
-					label: game.i18n.localize("No"),
-					callback: (event) => { }
-				}
-			},
-			default: "no"
+		const confirmed = await DialogV2.confirm({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ConfirmDeleteTitle") },
+			content: `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ConfirmDeleteContent")}</p>`
 		});
 
-		dialog.render(true);
+		if (!confirmed) return;
+
+		const newMap = foundry.utils.duplicate(this.map);
+		newMap.splice(row, 1);
+		this.map = newMap;
+		this.render();
 	}
 
 	/**
@@ -803,62 +817,44 @@ export class ConditionLab extends FormApplication {
 	 * Opens dialog to reset to default values.
 	 * @param {*} event
 	 */
-	_onRestoreDefaults(event) {
+	async _onRestoreDefaults(event) {
 		event.preventDefault();
-		const content = game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsContent");
+		const isDefault = this.mapType === "default";
+		const clearCacheCheckbox = isDefault
+			? `<div class="form-group">
+			<label>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.RestoreDefaultClearCache.CheckboxText")}</label>
+			<input type="checkbox" name="clear-cache">
+			</div>`
+			: "";
+		const content = `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsContent")}</p>${clearCacheCheckbox}`;
 
-		const confirmationDialog = new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsTitle"),
+		await DialogV2.confirm({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsTitle") },
 			content,
-			buttons: {
-				yes: {
-					icon: '<i class="fas fa-check"></i>',
-					label: game.i18n.localize("Yes"),
-					callback: ($html) => {
-						const checkbox = $html[0].querySelector("input[name='clear-cache']");
-						const clearCache = checkbox?.checked;
-						this._restoreDefaults({ clearCache });
-					}
-				},
-				no: {
-					icon: '<i class="fas fa-times"></i>',
-					label: game.i18n.localize("No"),
-					callback: () => { }
+			yes: {
+				callback: (event, button) => {
+					const checkbox = button.form.elements["clear-cache"];
+					this._restoreDefaults({ clearCache: checkbox?.checked });
 				}
 			},
-			default: "no",
-			close: () => { }
+			no: { callback: () => {} }
 		});
-
-		confirmationDialog.render(true);
 	}
 
 	/**
 	 * Reset form handler
 	 * @param {*} event
 	 */
-	_onResetForm(event) {
-		const dialog = new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormTitle"),
-			content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormContent"),
-			buttons: {
-				yes: {
-					icon: '<i class="fa fa-check"></i>',
-					label: game.i18n.localize("Yes"),
-					callback: (event) => {
-						this.map = this.initialMap;
-						this.render();
-					}
-				},
-				no: {
-					icon: '<i class="fa fa-times"></i>',
-					label: game.i18n.localize("No"),
-					callback: (event) => { }
-				}
-			},
-			default: "no"
+	async _onResetForm(event) {
+		const confirmed = await DialogV2.confirm({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormTitle") },
+			content: `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormContent")}</p>`
 		});
-		dialog.render(true);
+
+		if (!confirmed) return;
+
+		this.map = this.initialMap;
+		this.render();
 	}
 
 	async _onDrop(event) {
@@ -885,7 +881,7 @@ export class ConditionLab extends FormApplication {
 
 		const condition = this.map.find((c) => c.id === conditionId);
 
-		new EnhancedConditionMacroConfig(condition).render(true);
+		new EnhancedConditionMacroConfig(condition).render({ force: true });
 	}
 
 	/**
@@ -900,9 +896,7 @@ export class ConditionLab extends FormApplication {
 
 		const condition = this.map.find((c) => c.id === conditionId);
 
-		const config = new EnhancedConditionOptionConfig(condition);
-		config.parent = this;
-		config.render(true);
+		new EnhancedConditionOptionConfig(condition).render({ force: true });
 	}
 
 	// Checks the updatedMap property against the initial map

@@ -81,6 +81,8 @@ a.add-temporary {
 
 #cub-condition-lab ol.condition-lab {
 	list-style: none;
+	flex: 1 1 auto;
+	min-height: 0;
 	overflow: hidden auto;
 	margin: 0;
 	padding: 0;
@@ -126,19 +128,24 @@ a.add-temporary {
 
 .condition-lab-form .window-content {
 	padding: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
 }
 
-.condition-lab-form form {
+.condition-lab-form .window-content > .condition-lab {
+	flex: 1 1 auto;
+	min-height: 0;
 	height: 100%;
 }
 
 .condition-lab li.row {
 	/* border-bottom: 2px groove beige; */
-	background: url("/ui/parchment.jpg");
 	border-radius: 5px;
 	margin: 5px;
 	padding: 3px;
 	column-gap: 3px;
+	align-items: flex-start;
 }
 
 .condition-lab .flexcol.grabber {
@@ -302,6 +309,18 @@ a.add-temporary {
 
 #cub-condition-lab .related-buttons {
 	justify-content: start;
+	align-items: center;
+	column-gap: 3px;
+}
+
+#cub-condition-lab .related-buttons button {
+	flex: 0 0 32px;
+	width: 32px;
+	height: 32px;
+	min-width: 0;
+	min-height: 0;
+	padding: 0;
+	line-height: 1;
 }
 
 #cub-condition-lab .flex-break {
