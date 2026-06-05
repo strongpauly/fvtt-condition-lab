@@ -1,40 +1,59 @@
 import { Sidekick } from "../sidekick.js";
 
+const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
+
 /**
  * Enhanced Condition Option Config Application
  */
-export default class EnhancedConditionOptionConfig extends FormApplication {
-	constructor(object, options) {
-		super(object, options);
+export default class EnhancedConditionOptionConfig extends HandlebarsApplicationMixin(ApplicationV2) {
+	constructor(object, options = {}) {
+		super(options);
 
+		this.object = object ?? {};
 		this.initialObject = foundry.utils.duplicate(this.object);
 	}
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			id: "cub-enhanced-condition-option-config",
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OptionConfig.Title"),
-			template: "modules/condition-lab/templates/enhanced-condition-option-config.hbs",
-			classes: ["sheet"],
-			closeOnSubmit: false,
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		id: "cub-enhanced-condition-option-config",
+		classes: ["sheet"],
+		tag: "form",
+		position: {
 			width: 500
-		});
-	}
+		},
+		window: {
+			title: "CLT.ENHANCED_CONDITIONS.OptionConfig.Title"
+		},
+		form: {
+			handler: EnhancedConditionOptionConfig.#onSubmitForm,
+			submitOnChange: false,
+			closeOnSubmit: false
+		}
+	};
 
-	getData() {
-		return {
+	/** @override */
+	static PARTS = {
+		form: {
+			template: "modules/condition-lab/templates/enhanced-condition-option-config.hbs"
+		}
+	};
+
+	/** @override */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+		return Object.assign(context, {
 			condition: this.object,
 			optionData: this.object.options,
 			specialStatus: CONFIG.specialStatusEffects
-		};
+		});
 	}
 
-	activateListeners(html) {
-		const checkboxes = html.find("input[type='checkbox']");
-
-		// for (const checkbox of checkboxes) {
-		checkboxes.on("change", (event) => this._onCheckboxChange(event));
-		// }
+	/** @override */
+	_onRender(context, options) {
+		super._onRender(context, options);
+		this.element
+			.querySelectorAll("input[type='checkbox']")
+			.forEach((el) => el.addEventListener("change", (event) => this._onCheckboxChange(event)));
 	}
 
 	/**
@@ -87,15 +106,30 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 					statusEffect: event.detail.statusLabel ?? event.detail.statusName
 				}
 			);
-			const yes = () => { };
-			const no = () => {
-				return (event.target.checked = false);
-			};
-			const defaultYes = false;
-			return Dialog.confirm({ title, content, yes, no, defaultYes }, {});
+			return DialogV2.confirm({
+				window: { title },
+				content: `<p>${content}</p>`,
+				yes: { callback: () => {} },
+				no: {
+					callback: () => {
+						event.target.checked = false;
+					}
+				}
+			});
 		}
 
 		return event;
+	}
+
+	/**
+	 * Form submission handler
+	 * @this {EnhancedConditionOptionConfig}
+	 * @param {SubmitEvent} event
+	 * @param {HTMLFormElement} form
+	 * @param {FormDataExtended} formData
+	 */
+	static #onSubmitForm(event, form, formData) {
+		return this._updateObject(event, formData.object);
 	}
 
 	async _updateObject(event, formData) {

@@ -34,7 +34,7 @@ export default class EnhancedEffectConfig extends foundry.applications.sheets.Ac
 			: data;
 
 		this.document.updateSource(data);
-		if (this._state === 2) await this.render();
+		if (this.rendered) await this.render();
 		if (ui.clt.conditionLab) {
 			ui.clt.conditionLab.map = ui.clt.conditionLab.updatedMap;
 			// ui.clt.conditionLab.unsaved = true;
