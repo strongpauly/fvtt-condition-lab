@@ -44,12 +44,9 @@ Thanks to everyone that supported the forked project. You can see who on [CLT's 
 
 The original project acknowledged that many of the functions found in the Combat Utility Belt are inspired by [Roll20 API scripts](https://github.com/RobinKuiper/Roll20APIScripts) written by @RobinKuiper.
 
-## Donations/Sponsorship
-
-Any support you can provide is greatly appreciated! Check out the `Sponsor this project` section in the right-hand sidebar.
 
 # Attribution
 
-This project is a fork of [Combat Utility Belt, by Death Save Development](https://github.com/death-save/combat-utility-belt).
+This project is a fork of [Condition Lab and Triggler, by mclemente](https://github.com/mclemente/fvtt-condition-lab).
 
 Concentration icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Flat Icon](www.flaticon.com)
