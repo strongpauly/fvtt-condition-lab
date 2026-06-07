@@ -826,7 +826,7 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 			<input type="checkbox" name="clear-cache">
 			</div>`
 			: "";
-		const content = `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsContent")}</p>${clearCacheCheckbox}`;
+		const content = `${game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsContent")}${clearCacheCheckbox}`;
 
 		await DialogV2.confirm({
 			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsTitle") },
@@ -848,7 +848,7 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 	async _onResetForm(event) {
 		const confirmed = await DialogV2.confirm({
 			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormTitle") },
-			content: `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormContent")}</p>`
+			content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormContent")
 		});
 
 		if (!confirmed) return;

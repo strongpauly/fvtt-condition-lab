@@ -123,7 +123,7 @@
         "RestoreDefaultsTitle": "Restaurar padrões?",
         "RestoreDefaultsContent": "<p>Tem certeza de que deseja restaurar este mapeamento para os padrões?</p> <strong> Se você salvar, esta alteração será permanente.</strong>",
         "ResetFormTitle": "Redefinir formulário?",
-        "ResetFormContent": "<p> Tem certeza de que deseja redefinir o formulário?</p> <p><strong>Você perderá todas as alterações não salvas.</strong></p>",
+        "ResetFormContent": "<p>Tem certeza de que deseja redefinir o formulário?</p><p><strong>Você perderá todas as alterações não salvas.</strong></p>",
         "SaveFailed": "Lab de condição falhou ao salvar e fechar",
         "SaveSuccess": "Mapeamento do Laboratório de Condições salvo!",
         "ImportTitle": "Importar Mapa de Condições",
