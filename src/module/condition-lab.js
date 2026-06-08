@@ -56,7 +56,7 @@ Hooks.on("init", () => {
 			function () {
 				const effectSize = game.settings.get("condition-lab", "effectSize");
 				// Use the default values if no setting found
-				const { multiplier = 2, divisor = 5 } = effectSizes[effectSize];
+				const { multiplier = 2, divisor = 5 } = effectSizes[effectSize] ?? {};
 
 				let i = 0;
 				const size = Math.round(canvas.dimensions.size / 2 / 5) * multiplier;
