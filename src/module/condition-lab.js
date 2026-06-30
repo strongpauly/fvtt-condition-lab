@@ -165,6 +165,19 @@ Hooks.on("ready", async () => {
 		// CONFIG.statusEffects
 		// CONFIG.specialStatusEffects
 	}
+	// One-time migration: convert any legacy ActiveEffect changes (top-level `changes` with a
+	// numeric `mode`) to the Foundry v14 `system.changes` schema and persist, so stored and
+	// exported maps don't trigger core's lossy legacy migration (which blanks non-JSON values).
+	// Self-guarding: once migrated no condition has a legacy `changes` array, so this is a no-op.
+	if (
+		game.user.isGM
+		&& game.release.generation >= 14
+		&& conditionMap.some((c) => Array.isArray(c.activeEffect?.changes))
+	) {
+		conditionMap.forEach((c) => EnhancedConditions._migrateActiveEffectChanges(c.activeEffect));
+		await game.settings.set("condition-lab", "activeConditionMap", conditionMap);
+	}
+
 	// const specialStatusEffectMap = game.settings.get("condition-lab", "specialStatusEffectMapping");
 	if (conditionMap.length) EnhancedConditions._updateStatusEffects(conditionMap);
 	setInterval(EnhancedConditions.updateConditionTimestamps, 15000);
