@@ -634,6 +634,10 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 
 		if (!conditionEffect) return;
 
+		// Convert legacy (CUB/v12) changes to the v14 `system.changes` schema before constructing
+		// the ActiveEffect, otherwise core's legacy migration blanks non-JSON change values
+		EnhancedConditions._migrateActiveEffectChanges(conditionEffect);
+
 		if (!foundry.utils.hasProperty(conditionEffect, "flags.condition-lab.conditionId")) {
 			foundry.utils.setProperty(
 				conditionEffect,

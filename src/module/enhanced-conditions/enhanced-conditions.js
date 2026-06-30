@@ -1,6 +1,15 @@
 import { Sidekick } from "../sidekick.js";
 
 /**
+ * Maps the legacy numeric ActiveEffect change `mode` to the Foundry v14 string `type`
+ * (the lowercased mode name), e.g. 0 → "custom", 5 → "override". Derived from core's
+ * CONST.ACTIVE_EFFECT_MODES so any newly added mode (e.g. "subtract") is covered too.
+ */
+const CHANGE_MODES_TO_TYPES = Object.fromEntries(
+	Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([name, mode]) => [mode, name.toLowerCase()])
+);
+
+/**
  * Builds a mapping between status icons and journal entries that represent conditions
  */
 export class EnhancedConditions {
@@ -358,6 +367,8 @@ export class EnhancedConditions {
 			if (condition.options.outputChat === undefined) condition.options.outputChat = outputChatSetting;
 			// Normalise the legacy `icon` property to `img` used by status effects
 			condition.img ??= condition.icon;
+			// Normalise legacy ActiveEffect changes to the v14 `system.changes` schema
+			EnhancedConditions._migrateActiveEffectChanges(condition.activeEffect);
 			preparedMap.push(condition);
 		}
 
@@ -445,6 +456,48 @@ export class EnhancedConditions {
 	}
 
 	/**
+	 * Returns a condition's ActiveEffect changes in the Foundry v14 `system.changes` schema,
+	 * preserving each change's raw value.
+	 *
+	 * Foundry v14 moved ActiveEffect changes from the top-level `changes` array (numeric `mode`)
+	 * to `system.changes` (string `type` + `phase`). Passing the legacy shape to `new ActiveEffect`
+	 * triggers a core migration that runs every string value through `JSON.parse` and blanks
+	 * anything that isn't valid JSON — silently wiping macro names, hex colours, preset names, etc.
+	 * Building the v14 shape ourselves keeps those values intact.
+	 * @param {object} activeEffect  a condition's ActiveEffect data
+	 * @returns {object[]} the changes in `system.changes` form
+	 */
+	static _getSystemChanges(activeEffect) {
+		if (Array.isArray(activeEffect?.system?.changes)) return activeEffect.system.changes;
+		const legacyChanges = activeEffect?.changes;
+		if (!Array.isArray(legacyChanges)) return [];
+		return legacyChanges.map((c) => {
+			const change = {
+				key: c.key,
+				type: c.type ?? CHANGE_MODES_TO_TYPES[c.mode] ?? "custom",
+				value: c.value,
+				phase: c.phase ?? "initial"
+			};
+			if (c.priority != null) change.priority = c.priority;
+			return change;
+		});
+	}
+
+	/**
+	 * Migrates a condition's ActiveEffect changes to the v14 `system.changes` schema in place,
+	 * dropping the legacy top-level `changes` array. Idempotent.
+	 * @param {object} activeEffect  a condition's ActiveEffect data (mutated)
+	 * @returns {object} the same activeEffect
+	 */
+	static _migrateActiveEffectChanges(activeEffect) {
+		if (!activeEffect || !Array.isArray(activeEffect.changes)) return activeEffect;
+		const changes = EnhancedConditions._getSystemChanges(activeEffect);
+		activeEffect.system = { ...(activeEffect.system ?? {}), changes };
+		delete activeEffect.changes;
+		return activeEffect;
+	}
+
+	/**
 	 * Converts the given Condition Map (one or more Conditions) into a Status Effects array or object
 	 * @param {object[] | object} conditionMap
 	 * @returns {object[]} statusEffects
@@ -466,7 +519,9 @@ export class EnhancedConditions {
 				statuses: [id],
 				name,
 				img,
-				changes: activeEffect?.changes || [],
+				// v14 stores changes under `system.changes`; emit that shape so applying the
+				// condition (via ActiveEffect.fromStatusEffect) doesn't run the lossy legacy migration
+				system: { changes: EnhancedConditions._getSystemChanges(activeEffect) },
 				description: activeEffect?.description || "",
 				duration: duration || activeEffect?.duration || {},
 				flags: {
