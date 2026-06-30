@@ -86,20 +86,33 @@ Hooks.on("init", () => {
 			"OVERRIDE"
 		);
 
-		// Foundry v14.364: ActiveEffect#toObject() emits a back-compat top-level `changes`
-		// array alongside `system.changes`. Feeding that back through `new ActiveEffect`
-		// (e.g. the token HUD's toggleStatusEffect → create(fromStatusEffect(id).toObject()))
-		// re-runs the legacy changes→system.changes migration, which blanks every non-numeric
-		// change value. When `system.changes` is already present it is authoritative, so drop
-		// the redundant top-level `changes` before the migration runs to keep values intact.
+		// Foundry v14.364: ActiveEffect#toObject() re-emits a back-compat top-level `changes`
+		// array alongside `system.changes`. When that serialized data is fed back through
+		// document creation — e.g. the token HUD's toggleStatusEffect does
+		// `create(fromStatusEffect(id).toObject())`, and the data is sent to the server — the
+		// legacy changes→system.changes migration re-runs and blanks every non-numeric change
+		// value (macro names, hex colours, etc.). `system.changes` is authoritative, so strip the
+		// redundant top-level `changes` from toObject() output to keep the serialized/transmitted
+		// data clean. (Also guard construction directly, for data supplied with both shapes.)
+		const stripLegacyChanges = (data) => {
+			if (data && Array.isArray(data.changes) && Array.isArray(data.system?.changes)) {
+				delete data.changes;
+			}
+			return data;
+		};
+		libWrapper.register(
+			"condition-lab",
+			"CONFIG.ActiveEffect.documentClass.prototype.toObject",
+			function (wrapped, ...args) {
+				return stripLegacyChanges(wrapped(...args));
+			},
+			"WRAPPER"
+		);
 		libWrapper.register(
 			"condition-lab",
 			"CONFIG.ActiveEffect.documentClass.prototype._initializeSource",
 			function (wrapped, data, options) {
-				if (data && Array.isArray(data.changes) && Array.isArray(data.system?.changes)) {
-					delete data.changes;
-				}
-				return wrapped(data, options);
+				return wrapped(stripLegacyChanges(data), options);
 			},
 			"WRAPPER"
 		);
