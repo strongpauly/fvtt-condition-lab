@@ -85,6 +85,24 @@ Hooks.on("init", () => {
 			},
 			"OVERRIDE"
 		);
+
+		// Foundry v14.364: ActiveEffect#toObject() emits a back-compat top-level `changes`
+		// array alongside `system.changes`. Feeding that back through `new ActiveEffect`
+		// (e.g. the token HUD's toggleStatusEffect → create(fromStatusEffect(id).toObject()))
+		// re-runs the legacy changes→system.changes migration, which blanks every non-numeric
+		// change value. When `system.changes` is already present it is authoritative, so drop
+		// the redundant top-level `changes` before the migration runs to keep values intact.
+		libWrapper.register(
+			"condition-lab",
+			"CONFIG.ActiveEffect.documentClass.prototype._initializeSource",
+			function (wrapped, data, options) {
+				if (data && Array.isArray(data.changes) && Array.isArray(data.system?.changes)) {
+					delete data.changes;
+				}
+				return wrapped(data, options);
+			},
+			"WRAPPER"
+		);
 	}
 });
 
