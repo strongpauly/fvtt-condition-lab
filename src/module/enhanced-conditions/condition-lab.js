@@ -630,7 +630,12 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 
 		if (!condition) return;
 
-		const conditionEffect = condition.activeEffect ?? EnhancedConditions.getActiveEffects(condition)[0];
+		// Clone the map's effect data: the v14 DataModel constructor takes ownership of the
+		// object it is given — it attaches back-compat shims and then seals it — which would
+		// leave the map row's activeEffect sealed and crash later migrations/merges.
+		const conditionEffect = foundry.utils.deepClone(
+			condition.activeEffect ?? EnhancedConditions.getActiveEffects(condition)[0]
+		);
 
 		if (!conditionEffect) return;
 
@@ -952,13 +957,16 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 	}
 
 	_onEditImage(event) {
-		const current = event.target.getAttribute("src");
+		// Capture the element now: event.currentTarget is nulled once dispatch
+		// completes, long before the FilePicker callback fires.
+		const img = event.currentTarget;
+		const current = img.getAttribute("src");
 		const fp = new FilePicker({
 			current,
 			type: "image",
 			callback: (path) => {
-				event.currentTarget.src = path;
-				const iconPath = event.target.closest(".content1").querySelector(".icon-path");
+				img.src = path;
+				const iconPath = img.closest(".content1").querySelector(".icon-path");
 				iconPath.value = path;
 				this.map = this.updatedMap;
 				if (this._hasMapChanged()) this.render();
