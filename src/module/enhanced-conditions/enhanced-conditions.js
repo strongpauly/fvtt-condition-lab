@@ -490,7 +490,12 @@ export class EnhancedConditions {
 	 * @returns {object} the same activeEffect
 	 */
 	static _migrateActiveEffectChanges(activeEffect) {
-		if (!activeEffect || !Array.isArray(activeEffect.changes)) return activeEffect;
+		if (!activeEffect) return activeEffect;
+		// Only a plain data property is legacy data. Objects that have passed through the v14
+		// DataModel constructor instead carry a non-configurable `changes` accessor shim over
+		// `system.changes` (and are sealed, so deleting it would throw) — nothing to migrate.
+		const descriptor = Object.getOwnPropertyDescriptor(activeEffect, "changes");
+		if (!descriptor || !Array.isArray(descriptor.value)) return activeEffect;
 		const changes = EnhancedConditions._getSystemChanges(activeEffect);
 		activeEffect.system = { ...(activeEffect.system ?? {}), changes };
 		delete activeEffect.changes;
