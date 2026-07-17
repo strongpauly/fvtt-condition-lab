@@ -433,7 +433,7 @@ export class EnhancedConditions {
 		const activeConditionEffects = EnhancedConditions._prepareStatusEffects(activeConditionMap);
 
 		if (removeDefaultEffects) {
-			CONFIG.statusEffects = activeConditionEffects ?? [];
+			CONFIG.statusEffects = EnhancedConditions._dedupeStatusEffects(activeConditionEffects ?? []);
 		} else if (activeConditionMap instanceof Array) {
 			// add the icons from the condition map to the status effects array
 			const coreEffects =
@@ -450,9 +450,28 @@ export class EnhancedConditions {
 				for (const effect of activeConditionEffects) effect.order ??= defaultOrder;
 			}
 
-			// Create a Set based on the core status effects and the Enhanced Condition effects. Using a Set ensures unique icons only
-			CONFIG.statusEffects = coreEffects.concat(activeConditionEffects);
+			// Combine the core status effects with the Enhanced Condition effects, deduped by
+			// id — a mapped condition supersedes the core effect it was inferred from.
+			CONFIG.statusEffects = EnhancedConditions._dedupeStatusEffects(coreEffects.concat(activeConditionEffects));
 		}
+	}
+
+	/**
+	 * Dedupes status effects by id, keeping the position of the first occurrence and the data
+	 * of the last (so a mapped condition replaces the core effect it shares an id with).
+	 *
+	 * Foundry v14's `CONFIG.statusEffects` is a Proxy whose `ownKeys` trap returns one key per
+	 * element's `id`, so duplicate ids make every `Object.keys/values()` over it throw
+	 * `'ownKeys' on proxy: trap returned duplicate entries` — breaking, among other things,
+	 * scene texture preloading. Inferred condition maps reuse the core effect ids, so the
+	 * combined array must be deduped before assignment.
+	 * @param {object[]} statusEffects  the combined status effects
+	 * @returns {object[]} the status effects with one entry per id
+	 */
+	static _dedupeStatusEffects(statusEffects) {
+		const effectsById = new Map();
+		for (const effect of statusEffects) effectsById.set(effect.id, effect);
+		return [...effectsById.values()];
 	}
 
 	/**
