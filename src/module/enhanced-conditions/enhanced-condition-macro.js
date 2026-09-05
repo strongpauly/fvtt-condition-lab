@@ -61,6 +61,7 @@ export default class EnhancedConditionMacroConfig extends HandlebarsApplicationM
 
 	/**
 	 * Form submission handler
+	 * @private
 	 * @this {EnhancedConditionMacroConfig}
 	 * @param {SubmitEvent} event
 	 * @param {HTMLFormElement} form

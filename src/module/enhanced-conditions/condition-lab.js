@@ -317,29 +317,8 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 	 * @param {object} formData
 	 */
 	async _updateObject(event, formData) {
-		const showDialogSetting = game.settings.get("condition-lab", "showSortDirectionDialog");
-
-		if (this.sortDirection && showDialogSetting) {
-			await DialogV2.confirm({
-				window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Title") },
-				content: `<p>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Content")}</p>
-				<div class="form-group"><label class="dont-show-again-checkbox">${game.i18n.localize(
-		"CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.CheckboxText"
-	)}<input type="checkbox" name="dont-show-again"></label></div>`,
-				yes: {
-					callback: (event, button) => {
-						const checkbox = button.form.elements["dont-show-again"];
-						if (checkbox?.checked) {
-							game.settings.set("condition-lab", "showSortDirectionDialog", false);
-						}
-						this._processFormUpdate(formData);
-					}
-				},
-				no: { callback: () => {} }
-			});
-		} else {
-			this._processFormUpdate(formData);
-		}
+		// The map is always saved in the order it's displayed in, sort direction included
+		await this._processFormUpdate(formData);
 	}
 
 	/**
@@ -478,6 +457,7 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 
 	/**
 	 * Header control handler to open the import dialog
+	 * @private
 	 * @this {ConditionLab}
 	 */
 	static #onImport() {
@@ -486,6 +466,7 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 
 	/**
 	 * Header control handler to export the current map
+	 * @private
 	 * @this {ConditionLab}
 	 */
 	static #onExport() {
@@ -494,6 +475,7 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 
 	/**
 	 * Form submission handler
+	 * @private
 	 * @this {ConditionLab}
 	 * @param {SubmitEvent} event
 	 * @param {HTMLFormElement} form

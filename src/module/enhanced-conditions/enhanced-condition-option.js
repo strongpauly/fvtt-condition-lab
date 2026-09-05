@@ -123,6 +123,7 @@ export default class EnhancedConditionOptionConfig extends HandlebarsApplication
 
 	/**
 	 * Form submission handler
+	 * @private
 	 * @this {EnhancedConditionOptionConfig}
 	 * @param {SubmitEvent} event
 	 * @param {HTMLFormElement} form

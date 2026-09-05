@@ -14,11 +14,6 @@
 					"asc": "Sortiere nach Name - A to Z (Klicken zum Ändern)",
 					"desc": "Sortiere nach Name - Z to A (Klicken zum Ändern)"
 				},
-				"SortDirectionSave": {
-					"Title": "Zuordnung mit Sortierreihenfolge speichern?",
-					"Content": "<p>'Ja' klicken, um die Condition Lab-Zuordnungen mit der aktuellen Sortierreihenfolge zu speichern. 'Nein' klicken, um Speichern abzubrechen.</p>",
-					"CheckboxText": "Nicht wieder anzeigen"
-				},
 				"BadReference": "Konnte keinen Link zu abgelegten Inhalt erzeugen (Akteur, Item, Notiz etc.)",
 				"RestoreDefaultClearCache": {
 					"CheckboxText": "Cache löschen und Voreinstellungen aus Modulordner laden?"
@@ -140,9 +135,7 @@
 				"SuppressPreventativeSaveReminderN": "Präventive Speicher-Erinnerung unterdrücken",
 				"SuppressPreventativeSaveReminderH": "Die Erinnerung an das Speichern des Condition Labs zur Vermeidung von Problemen unterdrücken (z.B. wenn der Benutzer dies bereits getan hat)",
 				"MigrationVersionN": "Migrations-Version",
-				"MigrationVersionH": "CUB-Version, für die zuletzt Migration durchgeführt wurde",
-				"ShowSortDirectionDialogN": "Zeige Speicherdialog für Sortierreihenfolge im Condition Lab",
-				"ShowSortDirectionDialogH": "Legt fest, ob der Bestätigungsdialog beim Speichern der Sortierreihenfolge im Condition Lab angezeigt werden soll."
+				"MigrationVersionH": "CUB-Version, für die zuletzt Migration durchgeführt wurde"
 			},
 			"TokenUtility": {
 				"TokenEffectSizeN": "Icongröße für Spielfigur-Effekte",

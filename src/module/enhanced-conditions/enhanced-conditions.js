@@ -42,8 +42,11 @@ export class EnhancedConditions {
 			effectId
 		}));
 
-		const toOutput = conditions.filter((condition) => (isDefault && game.settings.get("condition-lab", "defaultConditionsOutputToChat"))
-			|| (game.settings.get("condition-lab", "conditionsOutputToChat") && condition?.options?.outputChat));
+		const toOutput = conditions.filter(
+			(condition) =>
+				(isDefault && game.settings.get("condition-lab", "defaultConditionsOutputToChat"))
+				|| (game.settings.get("condition-lab", "conditionsOutputToChat") && condition?.options?.outputChat)
+		);
 		const actor = effect.parent;
 
 		if (toOutput.length) {
@@ -149,13 +152,12 @@ export class EnhancedConditions {
 				referenceId = `${referenceId}{${e.name}}`;
 			}
 			const isDefault = !e.options;
-			return ({
+			return {
 				...e,
 				referenceId,
 				hasReference: !!referenceId,
-				hasButtons: !isDefault
-					&& game.user.isGM
-			});
+				hasButtons: !isDefault && game.user.isGM
+			};
 		});
 
 		// if the last message Enhanced conditions, append instead of making a new one
@@ -188,7 +190,9 @@ export class EnhancedConditions {
 			ui.chat.scrollBottom();
 		} else {
 			const chatCardHeading = game.i18n.localize(
-				type.active ? "CLT.ENHANCED_CONDITIONS.ChatCard.HeadingActive" : "CLT.ENHANCED_CONDITIONS.ChatCard.Heading"
+				type.active
+					? "CLT.ENHANCED_CONDITIONS.ChatCard.HeadingActive"
+					: "CLT.ENHANCED_CONDITIONS.ChatCard.Heading"
 			);
 
 			const templateData = {
@@ -430,30 +434,81 @@ export class EnhancedConditions {
 			return;
 		}
 
+		const alphabetical = game.settings.get("condition-lab", "forceAlphabeticalSort");
 		const activeConditionEffects = EnhancedConditions._prepareStatusEffects(activeConditionMap);
 
 		if (removeDefaultEffects) {
+			// Conditions carry no `order` of their own, so the HUD reads them all as 0 and falls
+			// through to its by-name tie-break — the alphabetical case needs no ordering at all.
+			if (!alphabetical) EnhancedConditions._applyMapOrder(activeConditionEffects);
 			CONFIG.statusEffects = EnhancedConditions._dedupeStatusEffects(activeConditionEffects ?? []);
 		} else if (activeConditionMap instanceof Array) {
 			// add the icons from the condition map to the status effects array
-			const coreEffects =
-				CONFIG.defaultStatusEffects || game.clt.CoreStatusEffects;
+			const coreEffects = CONFIG.defaultStatusEffects || game.clt.CoreStatusEffects;
 
-			// Foundry's token HUD sorts status effects by `(a.order - b.order) || title`.
-			// Some systems (e.g. dnd5e) assign an explicit `order` to every core effect, so
-			// our effects (which have none, defaulting to 0) would all sort ahead of them.
-			// Match the core effects' largest order so our conditions fall into the same
-			// "general" bucket and get sorted alphabetically alongside them.
-			const coreOrders = coreEffects.map((e) => e.order).filter((o) => o != null);
-			if (coreOrders.length) {
-				const defaultOrder = Math.max(...coreOrders);
-				for (const effect of activeConditionEffects) effect.order ??= defaultOrder;
+			if (!alphabetical) {
+				// Number our conditions from just past the highest core order, so a core effect
+				// the map doesn't cover keeps its deliberate placement rather than being
+				// scattered through our conditions. Only finite orders count: dnd5e defaults
+				// every status effect it registers to `order: Infinity` (reserving finite orders
+				// for the few it pins to the top of the HUD), and `Infinity + index` is still
+				// Infinity — which would give every condition the same order and leave the HUD
+				// sorting them by name.
+				const coreOrders = coreEffects.map((e) => e.order).filter((o) => Number.isFinite(o));
+				const baseOrder = (coreOrders.length ? Math.max(...coreOrders) : 0) + 1;
+				EnhancedConditions._applyMapOrder(activeConditionEffects, baseOrder);
 			}
 
 			// Combine the core status effects with the Enhanced Condition effects, deduped by
 			// id — a mapped condition supersedes the core effect it was inferred from.
-			CONFIG.statusEffects = EnhancedConditions._dedupeStatusEffects(coreEffects.concat(activeConditionEffects));
+			const statusEffects = EnhancedConditions._dedupeStatusEffects(coreEffects.concat(activeConditionEffects));
+
+			// Core effects the system pins with an explicit order (dnd5e holds dead and the cover
+			// effects at the top of the HUD) would otherwise escape the alphabetical sort.
+			CONFIG.statusEffects = alphabetical
+				? EnhancedConditions._applyAlphabeticalOrder(statusEffects)
+				: statusEffects;
 		}
+	}
+
+	/**
+	 * Flattens `order` across the given status effects so the token HUD's
+	 * `(a.order - b.order) || title` sort falls through to the title comparison, listing every
+	 * effect alphabetically in the client's language.
+	 *
+	 * Works on copies rather than mutating: `game.clt.CoreStatusEffects` is the session's only
+	 * record of the order the system configured, and it has to survive intact for when the
+	 * setting is turned back off. Each copy is built from the originals' property descriptors so
+	 * it keeps the non-enumerable `label`/`icon` back-compat accessors.
+	 * @param {object[]} statusEffects  the status effects to list alphabetically
+	 * @returns {object[]} copies of the status effects, all sharing one `order`
+	 */
+	static _applyAlphabeticalOrder(statusEffects) {
+		return (statusEffects ?? []).map((effect) => {
+			const copy = Object.create(Object.getPrototypeOf(effect), Object.getOwnPropertyDescriptors(effect));
+			copy.order = 0;
+			return copy;
+		});
+	}
+
+	/**
+	 * Numbers status effects with the `order` the token HUD sorts by, following the row order of
+	 * the Condition Lab.
+	 *
+	 * Foundry's token HUD sorts status effects by `(a.order - b.order) || title`, so effects
+	 * without an `order` (all of ours, since `_prepareStatusEffects` doesn't emit one) end up
+	 * listed alphabetically. Giving each condition an incrementing order makes the HUD present
+	 * them in the order they're arranged in the Condition Lab — whether that arrangement came
+	 * from the row move up/down arrows or from saving the map with the name sort applied.
+	 * @param {object[]} statusEffects  the condition map's status effects, in map order (mutated)
+	 * @param {number} [baseOrder]      the order to give the first condition
+	 * @returns {object[]} the same statusEffects
+	 */
+	static _applyMapOrder(statusEffects, baseOrder = 0) {
+		(statusEffects ?? []).forEach((effect, index) => {
+			effect.order = baseOrder + index;
+		});
+		return statusEffects;
 	}
 
 	/**
@@ -638,9 +693,7 @@ export class EnhancedConditions {
 	static getDefaultMap(defaultMaps = null) {
 		const system = game.system.id;
 		defaultMaps =
-			defaultMaps instanceof Object
-				? defaultMaps
-				: game.settings.get("condition-lab", "defaultConditionMaps");
+			defaultMaps instanceof Object ? defaultMaps : game.settings.get("condition-lab", "defaultConditionMaps");
 		let defaultMap = defaultMaps[system] || [];
 
 		if (!defaultMap.length) {
@@ -657,9 +710,10 @@ export class EnhancedConditions {
 	 */
 	static buildDefaultMap() {
 		const coreEffectsSetting = game.clt.CoreStatusEffects;
-		const coreEffects = coreEffectsSetting && coreEffectsSetting.length
-			? coreEffectsSetting
-			: foundry.utils.duplicate(CONFIG.statusEffects);
+		const coreEffects =
+			coreEffectsSetting && coreEffectsSetting.length
+				? coreEffectsSetting
+				: foundry.utils.duplicate(CONFIG.statusEffects);
 		return EnhancedConditions._prepareMap(coreEffects);
 	}
 
@@ -741,9 +795,7 @@ export class EnhancedConditions {
 				`${game.i18n.localize("CLT.ENHANCED_CONDTIONS.ApplyCondition.Failed.NoEffect")} ${conditions}`
 			);
 			console.log(
-				`Condition Lab | ${game.i18n.localize(
-					"CLT.ENHANCED_CONDTIONS.ApplyCondition.Failed.NoEffect"
-				)}`,
+				`Condition Lab | ${game.i18n.localize("CLT.ENHANCED_CONDTIONS.ApplyCondition.Failed.NoEffect")}`,
 				conditions
 			);
 			return;
@@ -1066,9 +1118,7 @@ export class EnhancedConditions {
 
 			const conditionEffect = actor.effects.contents.some((ae) => {
 				return conditions.some(
-					(e) =>
-						e?.flags["condition-lab"].conditionId
-						=== ae.getFlag("condition-lab", "conditionId")
+					(e) => e?.flags["condition-lab"].conditionId === ae.getFlag("condition-lab", "conditionId")
 				);
 			});
 
@@ -1168,7 +1218,10 @@ export class EnhancedConditions {
 				return;
 			}
 
-			await actor.deleteEmbeddedDocuments("ActiveEffect", toRemove.map((e) => e.id));
+			await actor.deleteEmbeddedDocuments(
+				"ActiveEffect",
+				toRemove.map((e) => e.id)
+			);
 		}
 	}
 
