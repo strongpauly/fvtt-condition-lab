@@ -56,6 +56,18 @@ export function registerSettings() {
 		}
 	});
 
+	game.settings.register("condition-lab", "forceAlphabeticalSort", {
+		name: "CLT.SETTINGS.EnhancedConditions.ForceAlphabeticalSortN",
+		hint: "CLT.SETTINGS.EnhancedConditions.ForceAlphabeticalSortH",
+		scope: "world",
+		type: Boolean,
+		config: true,
+		default: true,
+		onChange: () => {
+			EnhancedConditions._updateStatusEffects();
+		}
+	});
+
 	game.settings.register("condition-lab", "defaultConditionsOutputToChat", {
 		name: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatN",
 		hint: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatH",
@@ -73,15 +85,6 @@ export function registerSettings() {
 		config: false,
 		apiOnly: true,
 		default: ""
-	});
-
-	game.settings.register("condition-lab", "showSortDirectionDialog", {
-		name: "CLT.SETTINGS.EnhancedConditions.ShowSortDirectionDialogN",
-		hint: "CLT.SETTINGS.EnhancedConditions.ShowSortDirectionDialogH",
-		scope: "world",
-		type: Boolean,
-		config: true,
-		default: true
 	});
 
 	game.settings.register("condition-lab", "defaultSpecialStatusEffects", {

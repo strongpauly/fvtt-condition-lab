@@ -167,9 +167,10 @@ export async function link() {
 	}
 }
 
-export function docs(done) {
-	jsdoc2md
+export function docs() {
+	// Return the promise: signalling completion before the render resolves lets gulp finish the
+	// task (and the process exit) before API.md is written
+	return jsdoc2md
 		.render({ files: ["src/module/**/*.?(m)js", "src/module/*.js"], configure: "jsdoc-conf.json" })
 		.then((output) => fs.writeFileSync("API.md", output));
-	return done();
 }

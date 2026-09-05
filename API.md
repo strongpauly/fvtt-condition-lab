@@ -2,7 +2,7 @@
 
 <dl>
 <dt><a href="#ConditionLab">ConditionLab</a></dt>
-<dd><p>Form application for managing mapping of Conditions to Icons and JournalEntries</p>
+<dd><p>Application for managing mapping of Conditions to Icons and JournalEntries</p>
 </dd>
 <dt><a href="#EnhancedConditionMacroConfig">EnhancedConditionMacroConfig</a></dt>
 <dd><p>Enhanced Condition Macro Config Application</p>
@@ -13,19 +13,28 @@
 <dt><a href="#EnhancedConditions">EnhancedConditions</a></dt>
 <dd><p>Builds a mapping between status icons and journal entries that represent conditions</p>
 </dd>
+<dt><a href="#EnhancedEffectConfig">EnhancedEffectConfig</a></dt>
+<dd><p>Active Effect config sheet for a Condition&#39;s Active Effect, writing changes back to the
+Condition Lab&#39;s map instead of to a document</p>
+</dd>
 <dt><a href="#Sidekick">Sidekick</a></dt>
 <dd><p>Provides helper methods for use elsewhere in the module (and has your back in a melee)</p>
+</dd>
+</dl>
+
+## Constants
+
+<dl>
+<dt><a href="#CHANGE_MODES_TO_TYPES">CHANGE_MODES_TO_TYPES</a></dt>
+<dd><p>Maps the legacy numeric ActiveEffect change <code>mode</code> to the Foundry v14 string <code>type</code>
+(the lowercased mode name), e.g. 0 → &quot;custom&quot;, 5 → &quot;override&quot;. Derived from core&#39;s
+CONST.ACTIVE_EFFECT_MODES so any newly added mode (e.g. &quot;subtract&quot;) is covered too.</p>
 </dd>
 </dl>
 
 ## Functions
 
 <dl>
-<dt><a href="#getData">getData()</a></dt>
-<dd></dd>
-<dt><a href="#_processSubmitData">_processSubmitData(event, formData)</a></dt>
-<dd><p>Override default update object behaviour</p>
-</dd>
 <dt><a href="#registerSettings">registerSettings()</a></dt>
 <dd><p>Registers the module&#39;s settings.</p>
 </dd>
@@ -34,60 +43,69 @@
 <a name="ConditionLab"></a>
 
 ## ConditionLab
-Form application for managing mapping of Conditions to Icons and JournalEntries
+Application for managing mapping of Conditions to Icons and JournalEntries
 
 **Kind**: global class  
 
 * [ConditionLab](#ConditionLab)
-    * _instance_
-        * [.updatedMap](#ConditionLab+updatedMap) ⇒ <code>Array.&lt;object&gt;</code>
-        * [.getData()](#ConditionLab+getData) ⇒ <code>object</code>
-        * [._buildSubmitData()](#ConditionLab+_buildSubmitData) ⇒ <code>object</code>
-        * [._processFormData(formData)](#ConditionLab+_processFormData) ⇒ <code>object</code>
-        * [._restoreDefaults(options)](#ConditionLab+_restoreDefaults)
-        * [._updateObject(event, formData)](#ConditionLab+_updateObject)
-        * [._processFormUpdate(formData)](#ConditionLab+_processFormUpdate)
-        * [._saveMapping(newMap, mapType)](#ConditionLab+_saveMapping)
-        * [._finaliseSave(preparedMap)](#ConditionLab+_finaliseSave)
-        * [._exportToJSON()](#ConditionLab+_exportToJSON)
-        * [._importFromJSONDialog()](#ConditionLab+_importFromJSONDialog)
-        * [._processImport(html)](#ConditionLab+_processImport) ⇒ <code>\*</code>
-        * [._getHeaderButtons()](#ConditionLab+_getHeaderButtons)
-        * [.activateListeners()](#ConditionLab+activateListeners)
-        * [._activateCoreListeners()](#ConditionLab+_activateCoreListeners)
-        * [._onChangeInputs(event)](#ConditionLab+_onChangeInputs) ⇒ <code>Application.render</code>
-        * [._onChangeFilter(event)](#ConditionLab+_onChangeFilter)
-        * [._filterMapByName(map, filter)](#ConditionLab+_filterMapByName) ⇒ <code>Array.&lt;object&gt;</code>
-        * [._onChangeMapType(event)](#ConditionLab+_onChangeMapType)
-        * [._onClickActiveEffectConfig(event)](#ConditionLab+_onClickActiveEffectConfig)
-        * [._onChangeReferenceId(event)](#ConditionLab+_onChangeReferenceId)
-        * [._onAddRow(event)](#ConditionLab+_onAddRow)
-        * [._onRemoveRow(event)](#ConditionLab+_onRemoveRow)
-        * [._onChangeSortOrder(event)](#ConditionLab+_onChangeSortOrder)
-        * [._onClickSortButton(event)](#ConditionLab+_onClickSortButton) ⇒ <code>Application</code>
-        * [._sortMapByName(map, direction)](#ConditionLab+_sortMapByName) ⇒ <code>Array</code>
-        * [._onRestoreDefaults(event)](#ConditionLab+_onRestoreDefaults)
-        * [._onResetForm(event)](#ConditionLab+_onResetForm)
-        * [._onClickMacroConfig(event)](#ConditionLab+_onClickMacroConfig)
-        * [._onClickOptionConfig(event)](#ConditionLab+_onClickOptionConfig)
-        * [._hasPropertyChanged(propertyName, original, comparison)](#ConditionLab+_hasPropertyChanged) ⇒ <code>boolean</code>
-    * _static_
-        * [._onRender(app, html, data)](#ConditionLab._onRender)
-        * [._onRenderSaveDialog(app, html, data)](#ConditionLab._onRenderSaveDialog)
-        * [._onRenderRestoreDefaultsDialog(app, html, data)](#ConditionLab._onRenderRestoreDefaultsDialog)
+    * [.DEFAULT_OPTIONS](#ConditionLab+DEFAULT_OPTIONS)
+    * [.PARTS](#ConditionLab+PARTS)
+    * [.updatedMap](#ConditionLab+updatedMap) ⇒ <code>Array.&lt;object&gt;</code>
+    * [._prepareContext(options)](#ConditionLab+_prepareContext) ⇒ <code>object</code>
+    * [._buildSubmitData()](#ConditionLab+_buildSubmitData) ⇒ <code>object</code>
+    * [._processFormData(formData)](#ConditionLab+_processFormData) ⇒ <code>object</code>
+    * [._restoreDefaults(options)](#ConditionLab+_restoreDefaults)
+    * [._updateObject(event, formData)](#ConditionLab+_updateObject)
+    * [._processFormUpdate(formData)](#ConditionLab+_processFormUpdate)
+    * [._saveMapping(newMap, mapType)](#ConditionLab+_saveMapping)
+    * [._finaliseSave(preparedMap)](#ConditionLab+_finaliseSave)
+    * [._exportToJSON()](#ConditionLab+_exportToJSON)
+    * [._importFromJSONDialog()](#ConditionLab+_importFromJSONDialog)
+    * [._processImport(form)](#ConditionLab+_processImport) ⇒ <code>\*</code>
+    * [._getHeaderControls()](#ConditionLab+_getHeaderControls)
+    * [._onRender()](#ConditionLab+_onRender)
+    * [._onChangeInputs(event)](#ConditionLab+_onChangeInputs) ⇒ <code>Application.render</code>
+    * [._onChangeFilter(event)](#ConditionLab+_onChangeFilter)
+    * [._filterMapByName(map, filter)](#ConditionLab+_filterMapByName) ⇒ <code>Array.&lt;object&gt;</code>
+    * [._onChangeMapType(event)](#ConditionLab+_onChangeMapType)
+    * [._onClickActiveEffectConfig(event)](#ConditionLab+_onClickActiveEffectConfig)
+    * [._onChangeReferenceId(event)](#ConditionLab+_onChangeReferenceId)
+    * [._onAddRow(event)](#ConditionLab+_onAddRow)
+    * [._onRemoveRow(event)](#ConditionLab+_onRemoveRow)
+    * [._onChangeSortOrder(event)](#ConditionLab+_onChangeSortOrder)
+    * [._onClickSortButton(event)](#ConditionLab+_onClickSortButton) ⇒ <code>Application</code>
+    * [._sortMapByName(map, direction)](#ConditionLab+_sortMapByName) ⇒ <code>Array</code>
+    * [._onRestoreDefaults(event)](#ConditionLab+_onRestoreDefaults)
+    * [._onResetForm(event)](#ConditionLab+_onResetForm)
+    * [._onClickMacroConfig(event)](#ConditionLab+_onClickMacroConfig)
+    * [._onClickOptionConfig(event)](#ConditionLab+_onClickOptionConfig)
+    * [._hasPropertyChanged(propertyName, original, comparison)](#ConditionLab+_hasPropertyChanged) ⇒ <code>boolean</code>
 
+<a name="ConditionLab+DEFAULT_OPTIONS"></a>
+
+### conditionLab.DEFAULT\_OPTIONS
+**Kind**: instance property of [<code>ConditionLab</code>](#ConditionLab)  
+<a name="ConditionLab+PARTS"></a>
+
+### conditionLab.PARTS
+**Kind**: instance property of [<code>ConditionLab</code>](#ConditionLab)  
 <a name="ConditionLab+updatedMap"></a>
 
 ### conditionLab.updatedMap ⇒ <code>Array.&lt;object&gt;</code>
 Get updated map by combining existing in-memory map with current formdata
 
 **Kind**: instance property of [<code>ConditionLab</code>](#ConditionLab)  
-<a name="ConditionLab+getData"></a>
+<a name="ConditionLab+_prepareContext"></a>
 
-### conditionLab.getData() ⇒ <code>object</code>
+### conditionLab.\_prepareContext(options) ⇒ <code>object</code>
 Gets data for the template render
 
 **Kind**: instance method of [<code>ConditionLab</code>](#ConditionLab)  
+
+| Param | Type |
+| --- | --- |
+| options | <code>object</code> | 
+
 <a name="ConditionLab+_buildSubmitData"></a>
 
 ### conditionLab.\_buildSubmitData() ⇒ <code>object</code>
@@ -178,26 +196,22 @@ Borrowed from foundry.js Entity class
 **Kind**: instance method of [<code>ConditionLab</code>](#ConditionLab)  
 <a name="ConditionLab+_processImport"></a>
 
-### conditionLab.\_processImport(html) ⇒ <code>\*</code>
+### conditionLab.\_processImport(form) ⇒ <code>\*</code>
 Process a Condition Map Import
 
 **Kind**: instance method of [<code>ConditionLab</code>](#ConditionLab)  
 
 | Param | Type |
 | --- | --- |
-| html | <code>\*</code> | 
+| form | <code>HTMLFormElement</code> | 
 
-<a name="ConditionLab+_getHeaderButtons"></a>
+<a name="ConditionLab+_getHeaderControls"></a>
 
-### conditionLab.\_getHeaderButtons()
+### conditionLab.\_getHeaderControls()
 **Kind**: instance method of [<code>ConditionLab</code>](#ConditionLab)  
-<a name="ConditionLab+activateListeners"></a>
+<a name="ConditionLab+_onRender"></a>
 
-### conditionLab.activateListeners()
-**Kind**: instance method of [<code>ConditionLab</code>](#ConditionLab)  
-<a name="ConditionLab+_activateCoreListeners"></a>
-
-### conditionLab.\_activateCoreListeners()
+### conditionLab.\_onRender()
 **Kind**: instance method of [<code>ConditionLab</code>](#ConditionLab)  
 <a name="ConditionLab+_onChangeInputs"></a>
 
@@ -381,51 +395,30 @@ Checks a given propertyName on an original and comparison object to see if it ha
 | original | <code>\*</code> | 
 | comparison | <code>\*</code> | 
 
-<a name="ConditionLab._onRender"></a>
-
-### ConditionLab.\_onRender(app, html, data)
-Condition Lab Render handler
-
-**Kind**: static method of [<code>ConditionLab</code>](#ConditionLab)  
-
-| Param | Type |
-| --- | --- |
-| app | <code>\*</code> | 
-| html | <code>\*</code> | 
-| data | <code>\*</code> | 
-
-<a name="ConditionLab._onRenderSaveDialog"></a>
-
-### ConditionLab.\_onRenderSaveDialog(app, html, data)
-Render save dialog hook handler
-
-**Kind**: static method of [<code>ConditionLab</code>](#ConditionLab)  
-
-| Param | Type |
-| --- | --- |
-| app | <code>\*</code> | 
-| html | <code>jQuery</code> | 
-| data | <code>\*</code> | 
-
-<a name="ConditionLab._onRenderRestoreDefaultsDialog"></a>
-
-### ConditionLab.\_onRenderRestoreDefaultsDialog(app, html, data)
-Render restore defaults hook handler
-
-**Kind**: static method of [<code>ConditionLab</code>](#ConditionLab)  
-
-| Param | Type |
-| --- | --- |
-| app | <code>\*</code> | 
-| html | <code>\*</code> | 
-| data | <code>\*</code> | 
-
 <a name="EnhancedConditionMacroConfig"></a>
 
 ## EnhancedConditionMacroConfig
 Enhanced Condition Macro Config Application
 
 **Kind**: global class  
+
+* [EnhancedConditionMacroConfig](#EnhancedConditionMacroConfig)
+    * [.DEFAULT_OPTIONS](#EnhancedConditionMacroConfig+DEFAULT_OPTIONS)
+    * [.PARTS](#EnhancedConditionMacroConfig+PARTS)
+    * [._prepareContext()](#EnhancedConditionMacroConfig+_prepareContext)
+
+<a name="EnhancedConditionMacroConfig+DEFAULT_OPTIONS"></a>
+
+### enhancedConditionMacroConfig.DEFAULT\_OPTIONS
+**Kind**: instance property of [<code>EnhancedConditionMacroConfig</code>](#EnhancedConditionMacroConfig)  
+<a name="EnhancedConditionMacroConfig+PARTS"></a>
+
+### enhancedConditionMacroConfig.PARTS
+**Kind**: instance property of [<code>EnhancedConditionMacroConfig</code>](#EnhancedConditionMacroConfig)  
+<a name="EnhancedConditionMacroConfig+_prepareContext"></a>
+
+### enhancedConditionMacroConfig.\_prepareContext()
+**Kind**: instance method of [<code>EnhancedConditionMacroConfig</code>](#EnhancedConditionMacroConfig)  
 <a name="EnhancedConditionOptionConfig"></a>
 
 ## EnhancedConditionOptionConfig
@@ -435,12 +428,32 @@ Enhanced Condition Option Config Application
 
 * [EnhancedConditionOptionConfig](#EnhancedConditionOptionConfig)
     * _instance_
+        * [.DEFAULT_OPTIONS](#EnhancedConditionOptionConfig+DEFAULT_OPTIONS)
+        * [.PARTS](#EnhancedConditionOptionConfig+PARTS)
+        * [._prepareContext()](#EnhancedConditionOptionConfig+_prepareContext)
+        * [._onRender()](#EnhancedConditionOptionConfig+_onRender)
         * [._onCheckboxChange(event)](#EnhancedConditionOptionConfig+_onCheckboxChange) ⇒ <code>\*</code>
         * [.getSpecialStatusEffectByField(field)](#EnhancedConditionOptionConfig+getSpecialStatusEffectByField) ⇒ <code>string</code> \| <code>undefined</code>
         * [.setSpecialStatusEffectMapping(effect, conditionId)](#EnhancedConditionOptionConfig+setSpecialStatusEffectMapping)
     * _static_
         * [._onSpecialStatusEffectToggle(event)](#EnhancedConditionOptionConfig._onSpecialStatusEffectToggle) ⇒ <code>\*</code>
 
+<a name="EnhancedConditionOptionConfig+DEFAULT_OPTIONS"></a>
+
+### enhancedConditionOptionConfig.DEFAULT\_OPTIONS
+**Kind**: instance property of [<code>EnhancedConditionOptionConfig</code>](#EnhancedConditionOptionConfig)  
+<a name="EnhancedConditionOptionConfig+PARTS"></a>
+
+### enhancedConditionOptionConfig.PARTS
+**Kind**: instance property of [<code>EnhancedConditionOptionConfig</code>](#EnhancedConditionOptionConfig)  
+<a name="EnhancedConditionOptionConfig+_prepareContext"></a>
+
+### enhancedConditionOptionConfig.\_prepareContext()
+**Kind**: instance method of [<code>EnhancedConditionOptionConfig</code>](#EnhancedConditionOptionConfig)  
+<a name="EnhancedConditionOptionConfig+_onRender"></a>
+
+### enhancedConditionOptionConfig.\_onRender()
+**Kind**: instance method of [<code>EnhancedConditionOptionConfig</code>](#EnhancedConditionOptionConfig)  
 <a name="EnhancedConditionOptionConfig+_onCheckboxChange"></a>
 
 ### enhancedConditionOptionConfig.\_onCheckboxChange(event) ⇒ <code>\*</code>
@@ -507,6 +520,11 @@ Builds a mapping between status icons and journal entries that represent conditi
     * [._createJournalEntry(condition)](#EnhancedConditions._createJournalEntry) ⇒ <code>\*</code>
     * [._lookupConditionByName(conditionName)](#EnhancedConditions._lookupConditionByName) ⇒ <code>Array.&lt;string&gt;</code> \| <code>string</code> \| <code>undefined</code>
     * [._updateStatusEffects(conditionMap)](#EnhancedConditions._updateStatusEffects)
+    * [._applyAlphabeticalOrder(statusEffects)](#EnhancedConditions._applyAlphabeticalOrder) ⇒ <code>Array.&lt;object&gt;</code>
+    * [._applyMapOrder(statusEffects, [baseOrder])](#EnhancedConditions._applyMapOrder) ⇒ <code>Array.&lt;object&gt;</code>
+    * [._dedupeStatusEffects(statusEffects)](#EnhancedConditions._dedupeStatusEffects) ⇒ <code>Array.&lt;object&gt;</code>
+    * [._getSystemChanges(activeEffect)](#EnhancedConditions._getSystemChanges) ⇒ <code>Array.&lt;object&gt;</code>
+    * [._migrateActiveEffectChanges(activeEffect)](#EnhancedConditions._migrateActiveEffectChanges) ⇒ <code>object</code>
     * [._prepareStatusEffects(conditionMap)](#EnhancedConditions._prepareStatusEffects) ⇒ <code>Array.&lt;object&gt;</code>
     * [._prepareActiveEffects(effects)](#EnhancedConditions._prepareActiveEffects) ⇒ <code>Array.&lt;object&gt;</code>
     * [.getConditionsByIcon(icon)](#EnhancedConditions.getConditionsByIcon) ⇒ <code>Array.&lt;string&gt;</code>
@@ -657,6 +675,96 @@ Updates the CONFIG.statusEffect effects with Condition Map ones
 | Param | Type |
 | --- | --- |
 | conditionMap | <code>\*</code> | 
+
+<a name="EnhancedConditions._applyAlphabeticalOrder"></a>
+
+### EnhancedConditions.\_applyAlphabeticalOrder(statusEffects) ⇒ <code>Array.&lt;object&gt;</code>
+Flattens `order` across the given status effects so the token HUD's
+`(a.order - b.order) || title` sort falls through to the title comparison, listing every
+effect alphabetically in the client's language.
+
+Works on copies rather than mutating: `game.clt.CoreStatusEffects` is the session's only
+record of the order the system configured, and it has to survive intact for when the
+setting is turned back off. Each copy is built from the originals' property descriptors so
+it keeps the non-enumerable `label`/`icon` back-compat accessors.
+
+**Kind**: static method of [<code>EnhancedConditions</code>](#EnhancedConditions)  
+**Returns**: <code>Array.&lt;object&gt;</code> - copies of the status effects, all sharing one `order`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| statusEffects | <code>Array.&lt;object&gt;</code> | the status effects to list alphabetically |
+
+<a name="EnhancedConditions._applyMapOrder"></a>
+
+### EnhancedConditions.\_applyMapOrder(statusEffects, [baseOrder]) ⇒ <code>Array.&lt;object&gt;</code>
+Numbers status effects with the `order` the token HUD sorts by, following the row order of
+the Condition Lab.
+
+Foundry's token HUD sorts status effects by `(a.order - b.order) || title`, so effects
+without an `order` (all of ours, since `_prepareStatusEffects` doesn't emit one) end up
+listed alphabetically. Giving each condition an incrementing order makes the HUD present
+them in the order they're arranged in the Condition Lab — whether that arrangement came
+from the row move up/down arrows or from saving the map with the name sort applied.
+
+**Kind**: static method of [<code>EnhancedConditions</code>](#EnhancedConditions)  
+**Returns**: <code>Array.&lt;object&gt;</code> - the same statusEffects  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| statusEffects | <code>Array.&lt;object&gt;</code> |  | the condition map's status effects, in map order (mutated) |
+| [baseOrder] | <code>number</code> | <code>0</code> | the order to give the first condition |
+
+<a name="EnhancedConditions._dedupeStatusEffects"></a>
+
+### EnhancedConditions.\_dedupeStatusEffects(statusEffects) ⇒ <code>Array.&lt;object&gt;</code>
+Dedupes status effects by id, keeping the position of the first occurrence and the data
+of the last (so a mapped condition replaces the core effect it shares an id with).
+
+Foundry v14's `CONFIG.statusEffects` is a Proxy whose `ownKeys` trap returns one key per
+element's `id`, so duplicate ids make every `Object.keys/values()` over it throw
+`'ownKeys' on proxy: trap returned duplicate entries` — breaking, among other things,
+scene texture preloading. Inferred condition maps reuse the core effect ids, so the
+combined array must be deduped before assignment.
+
+**Kind**: static method of [<code>EnhancedConditions</code>](#EnhancedConditions)  
+**Returns**: <code>Array.&lt;object&gt;</code> - the status effects with one entry per id  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| statusEffects | <code>Array.&lt;object&gt;</code> | the combined status effects |
+
+<a name="EnhancedConditions._getSystemChanges"></a>
+
+### EnhancedConditions.\_getSystemChanges(activeEffect) ⇒ <code>Array.&lt;object&gt;</code>
+Returns a condition's ActiveEffect changes in the Foundry v14 `system.changes` schema,
+preserving each change's raw value.
+
+Foundry v14 moved ActiveEffect changes from the top-level `changes` array (numeric `mode`)
+to `system.changes` (string `type` + `phase`). Passing the legacy shape to `new ActiveEffect`
+triggers a core migration that runs every string value through `JSON.parse` and blanks
+anything that isn't valid JSON — silently wiping macro names, hex colours, preset names, etc.
+Building the v14 shape ourselves keeps those values intact.
+
+**Kind**: static method of [<code>EnhancedConditions</code>](#EnhancedConditions)  
+**Returns**: <code>Array.&lt;object&gt;</code> - the changes in `system.changes` form  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| activeEffect | <code>object</code> | a condition's ActiveEffect data |
+
+<a name="EnhancedConditions._migrateActiveEffectChanges"></a>
+
+### EnhancedConditions.\_migrateActiveEffectChanges(activeEffect) ⇒ <code>object</code>
+Migrates a condition's ActiveEffect changes to the v14 `system.changes` schema in place,
+dropping the legacy top-level `changes` array. Idempotent.
+
+**Kind**: static method of [<code>EnhancedConditions</code>](#EnhancedConditions)  
+**Returns**: <code>object</code> - the same activeEffect  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| activeEffect | <code>object</code> | a condition's ActiveEffect data (mutated) |
 
 <a name="EnhancedConditions._prepareStatusEffects"></a>
 
@@ -904,6 +1012,37 @@ game.clt.removeAllConditions(game.actors.getName("Bob"));
 // Remove all Conditions on the currently controlled Token
 game.clt.removeAllConditions();
 ```
+<a name="EnhancedEffectConfig"></a>
+
+## EnhancedEffectConfig
+Active Effect config sheet for a Condition's Active Effect, writing changes back to the
+Condition Lab's map instead of to a document
+
+**Kind**: global class  
+
+* [EnhancedEffectConfig](#EnhancedEffectConfig)
+    * [.title](#EnhancedEffectConfig+title) ⇒ <code>string</code>
+    * [._processSubmitData(_event, form, data)](#EnhancedEffectConfig+_processSubmitData)
+
+<a name="EnhancedEffectConfig+title"></a>
+
+### enhancedEffectConfig.title ⇒ <code>string</code>
+The sheet title, naming the condition being edited
+
+**Kind**: instance property of [<code>EnhancedEffectConfig</code>](#EnhancedEffectConfig)  
+<a name="EnhancedEffectConfig+_processSubmitData"></a>
+
+### enhancedEffectConfig.\_processSubmitData(_event, form, data)
+Override default update object behaviour
+
+**Kind**: instance method of [<code>EnhancedEffectConfig</code>](#EnhancedEffectConfig)  
+
+| Param | Type |
+| --- | --- |
+| _event | <code>\*</code> | 
+| form | <code>\*</code> | 
+| data | <code>\*</code> | 
+
 <a name="Sidekick"></a>
 
 ## Sidekick
@@ -1017,22 +1156,14 @@ Converts the given string to camelCase using the provided delimiter to break up 
 ```js
 Sidekick.toCamelCase("my-cool-string", "-") // returns "myCoolString"
 ```
-<a name="getData"></a>
+<a name="CHANGE_MODES_TO_TYPES"></a>
 
-## getData()
-**Kind**: global function  
-<a name="_processSubmitData"></a>
+## CHANGE\_MODES\_TO\_TYPES
+Maps the legacy numeric ActiveEffect change `mode` to the Foundry v14 string `type`
+(the lowercased mode name), e.g. 0 → "custom", 5 → "override". Derived from core's
+CONST.ACTIVE_EFFECT_MODES so any newly added mode (e.g. "subtract") is covered too.
 
-## \_processSubmitData(event, formData)
-Override default update object behaviour
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| event | <code>\*</code> | 
-| formData | <code>\*</code> | 
-
+**Kind**: global constant  
 <a name="registerSettings"></a>
 
 ## registerSettings()

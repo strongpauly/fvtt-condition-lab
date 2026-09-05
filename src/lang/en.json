@@ -14,11 +14,6 @@
 					"desc": "Z to A",
 					"unsorted": "Unsorted"
 				},
-				"SortDirectionSave": {
-					"Title": "Save Mapping with Sort Direction?",
-					"Content": "<p>Click 'Yes' to save the Condition Lab map with the current sort direction. Click 'No' to cancel Saving.</p>",
-					"CheckboxText": "Don't show this again"
-				},
 				"BadReference": "Could not build a link to the dropped content (actor, item, journal etc)",
 				"RestoreDefaultClearCache": {
 					"CheckboxText": "Clear cache"
@@ -169,6 +164,8 @@
 				"DefaultMapsH": "Module-provided maps of conditions to icons",
 				"RemoveDefaultEffectsN": "Remove Default Status Effects",
 				"RemoveDefaultEffectsH": "Remove existing status effect icons from token HUD",
+				"ForceAlphabeticalSortN": "Force Alphabetical Sort",
+				"ForceAlphabeticalSortH": "Sort the status effects in the token HUD alphabetically by name, including any default status effects that haven't been removed. Turn this off to have the token HUD follow the order the conditions are arranged in the Condition Lab instead.",
 				"DefaultOutputChatN": "Output Default Conditions to Chat",
 				"DefaultOutputChatH": "Output all default conditions to chat",
 				"MapTypeN": "Active Condition Map Type",
@@ -186,9 +183,7 @@
 				"SuppressPreventativeSaveReminderN": "Suppress Preventative Save Reminder",
 				"SuppressPreventativeSaveReminderH": "Suppress the reminder to save the Condition Lab to prevent issues (eg. if user has already done so)",
 				"MigrationVersionN": "Migration Version",
-				"MigrationVersionH": "Version of CUB for which migration was last performed",
-				"ShowSortDirectionDialogN": "Prompt Saving Sort Direction",
-				"ShowSortDirectionDialogH": "Whether or not to show the confirmation dialog for saving the sort direction."
+				"MigrationVersionH": "Version of CUB for which migration was last performed"
 			},
 			"TokenUtility": {
 				"TokenEffectSizeN": "Token Effect Icon Size",

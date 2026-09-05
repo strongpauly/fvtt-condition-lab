@@ -1,4 +1,12 @@
+/**
+ * Active Effect config sheet for a Condition's Active Effect, writing changes back to the
+ * Condition Lab's map instead of to a document
+ */
 export default class EnhancedEffectConfig extends foundry.applications.sheets.ActiveEffectConfig {
+	/**
+	 * The sheet title, naming the condition being edited
+	 * @returns {string}
+	 */
 	get title() {
 		const reference = this.document.name ? ` ${game.i18n.localize(this.document.name)}` : "";
 		return `${game.i18n.localize(this.document.constructor.metadata.label)}${reference}`;

@@ -14,11 +14,6 @@
           "desc": "Z a A",
           "unsorted": "Não Classificado"
         },
-        "SortDirectionSave": {
-          "Title": "Salvar mapeamento com Direção de Classificação?",
-          "Content": "<p>Clique em 'Sim' para salvar o mapa do Laboratório de Condição com a Direção de Classificação atual. Clique em 'Não' para cancelar o salvamento.</p>",
-          "CheckboxText": "Não mostrar isso novamente"
-        },
         "BadReference": "Não foi possível criar um link para o conteúdo (ator, item, diário, etc.)",
         "RestoreDefaultClearCache": {
           "CheckboxText": "Limpar o cache"
@@ -186,9 +181,7 @@
         "SuppressPreventativeSaveReminderN": "Suprimir lembrete de salvamento preventivo",
         "SuppressPreventativeSaveReminderH": "Suprima o lembrete para salvar o Laboratório de Condições para evitar problemas (por exemplo, se o usuário já tiver feito isso)",
         "MigrationVersionN": "Versão de Migração",
-        "MigrationVersionH": "Versão do CLT para a qual a migração foi realizada pela última vez",
-        "ShowSortDirectionDialogN": "Exibir Janela para salvar Direção de Classificação",
-        "ShowSortDirectionDialogH": "Se deve ou não mostrar a caixa de diálogo de confirmação para salvar a direção da classificação."
+        "MigrationVersionH": "Versão do CLT para a qual a migração foi realizada pela última vez"
       },
       "TokenUtility": {
         "TokenEffectSizeN": "Tamanho do ícone de efeito de token",
