@@ -1,0 +1,40 @@
+{
+	"_id": "CZB4vtGqkxYBmQ7P",
+	"name": "Confused",
+	"pages": [
+		{
+			"_id": "clConfusedPage01",
+			"name": "Confused",
+			"type": "text",
+			"title": {
+				"show": false,
+				"level": 1
+			},
+			"image": {},
+			"text": {
+				"format": 1,
+				"content": "<p>You can’t make opportunity attacks or use your limited powers. Your next attack action will be a basic or at-will attack against any nearby ally, determined randomly.</p>",
+				"markdown": ""
+			},
+			"video": {
+				"controls": true,
+				"volume": 0.5
+			},
+			"src": null,
+			"system": {},
+			"sort": 0,
+			"ownership": {
+				"default": -1
+			},
+			"flags": {},
+			"_key": "!journal.pages!CZB4vtGqkxYBmQ7P.clConfusedPage01"
+		}
+	],
+	"folder": null,
+	"sort": 0,
+	"ownership": {
+		"default": 0
+	},
+	"flags": {},
+	"_key": "!journal!CZB4vtGqkxYBmQ7P"
+}

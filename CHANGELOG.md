@@ -6,6 +6,9 @@
 2. The Default/Inferred Condition Lab Mappings for game systems may not correctly import all data. Importing the map from the CUB Condition Maps folder imports correctly.
 3. PF2e is not currently supported by Enhanced Conditions due to the customisation of the effects framework implemented by the system.
 
+## [3.0.7] - 2026-09-05
+- The bundled 13th Age conditions compendium is now a LevelDB pack, so it loads on Foundry v11 and later. Its entries have also been brought up to the current Journal Entry format — the rules text lives on a journal page instead of the removed `content` field, so the 13th Age map's rules links work again. (#2)
+
 ## [3.0.6] - 2026-09-05
 - Added a "Force Alphabetical Sort" setting, on by default, which lists the status effects in the token HUD alphabetically by name — including any default status effects that haven't been removed, such as the ones dnd5e pins to the top of the HUD.
 - With "Force Alphabetical Sort" turned off, the token HUD now lists conditions in the order they are arranged in the Condition Lab instead of always sorting them by name. (#9)

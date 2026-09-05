@@ -1,0 +1,40 @@
+{
+	"_id": "zwyeIeroFh6Yze5x",
+	"name": "Dazed",
+	"pages": [
+		{
+			"_id": "clDazedPage00001",
+			"name": "Dazed",
+			"type": "text",
+			"title": {
+				"show": false,
+				"level": 1
+			},
+			"image": {},
+			"text": {
+				"format": 1,
+				"content": "<p>You take a –4 penalty to attacks.</p>",
+				"markdown": ""
+			},
+			"video": {
+				"controls": true,
+				"volume": 0.5
+			},
+			"src": null,
+			"system": {},
+			"sort": 0,
+			"ownership": {
+				"default": -1
+			},
+			"flags": {},
+			"_key": "!journal.pages!zwyeIeroFh6Yze5x.clDazedPage00001"
+		}
+	],
+	"folder": null,
+	"sort": 0,
+	"ownership": {
+		"default": 0
+	},
+	"flags": {},
+	"_key": "!journal!zwyeIeroFh6Yze5x"
+}

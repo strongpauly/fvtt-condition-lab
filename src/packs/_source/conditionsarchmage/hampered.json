@@ -1,0 +1,40 @@
+{
+	"_id": "Np1orhugJRd5dYOH",
+	"name": "Hampered",
+	"pages": [
+		{
+			"_id": "clHamperedPage01",
+			"name": "Hampered",
+			"type": "text",
+			"title": {
+				"show": false,
+				"level": 1
+			},
+			"image": {},
+			"text": {
+				"format": 1,
+				"content": "<p>You can only make basic attacks. You can still move normally.</p>",
+				"markdown": ""
+			},
+			"video": {
+				"controls": true,
+				"volume": 0.5
+			},
+			"src": null,
+			"system": {},
+			"sort": 0,
+			"ownership": {
+				"default": -1
+			},
+			"flags": {},
+			"_key": "!journal.pages!Np1orhugJRd5dYOH.clHamperedPage01"
+		}
+	],
+	"folder": null,
+	"sort": 0,
+	"ownership": {
+		"default": 0
+	},
+	"flags": {},
+	"_key": "!journal!Np1orhugJRd5dYOH"
+}

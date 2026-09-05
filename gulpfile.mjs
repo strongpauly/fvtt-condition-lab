@@ -9,6 +9,7 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
 import rollupStream from "@rollup/stream";
+import { compilePack } from "@foundryvtt/foundryvtt-cli";
 
 import rollupConfig from "./rollup.config.mjs";
 
@@ -22,7 +23,9 @@ const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;
 const stylesExtension = "css";
 const sourceFileExtension = "js";
-const staticFiles = ["condition-maps", "icons", "lang", "packs", "templates", "module.json"];
+const staticFiles = ["condition-maps", "icons", "lang", "templates", "module.json"];
+const packsSourceDirectory = `${sourceDirectory}/packs/_source`;
+const packsDirectory = `${distDirectory}/packs`;
 
 /********************/
 /*      BUILD       */
@@ -64,6 +67,27 @@ async function copyFiles() {
 }
 
 /**
+ * Compile the compendium pack sources into LevelDB packs
+ *
+ * To edit a pack, load the built module in Foundry, make the changes there, then write them back to the sources with
+ * `npx fvtt package unpack <packName> --in dist/packs --out src/packs/_source/<packName> --clean`
+ */
+async function buildPacks() {
+	if (!fs.existsSync(packsSourceDirectory)) return;
+
+	const packs = fs.readdirSync(packsSourceDirectory, { withFileTypes: true }).filter((entry) => entry.isDirectory());
+
+	for (const pack of packs) {
+		const source = path.join(packsSourceDirectory, pack.name);
+		const destination = path.join(packsDirectory, pack.name);
+
+		// LevelDB keeps entries that are no longer in the source, so start from a clean pack every time
+		await fs.remove(destination);
+		await compilePack(source, destination, { recursive: true, log: true });
+	}
+}
+
+/**
  * Watch for changes for each build step
  */
 export function watch() {
@@ -74,9 +98,12 @@ export function watch() {
 		{ ignoreInitial: false },
 		copyFiles,
 	);
+	gulp.watch(`${packsSourceDirectory}/**/*.json`, { ignoreInitial: false }, buildPacks);
 }
 
-export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, copyFiles));
+export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildPacks, copyFiles));
+
+export { buildPacks as packs };
 
 /********************/
 /*      CLEAN       */
@@ -86,7 +113,7 @@ export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, co
  * Remove built files from `dist` folder while ignoring source files
  */
 export async function clean() {
-	const files = [...staticFiles, "module"];
+	const files = [...staticFiles, "module", "packs"];
 
 	if (fs.existsSync(`${stylesDirectory}/${packageId}.${stylesExtension}`)) {
 		files.push("styles");
