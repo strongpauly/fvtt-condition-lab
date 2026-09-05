@@ -4,31 +4,31 @@
 		{
 			"name": "Confused",
 			"icon": "icons/svg/stoned.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.CZB4vtGqkxYBmQ7P]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.CZB4vtGqkxYBmQ7P]{Confused}",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Dazed",
 			"icon": "icons/svg/daze.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.zwyeIeroFh6Yze5x]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.zwyeIeroFh6Yze5x]{Dazed}",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Fear",
 			"icon": "icons/svg/terror.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.I3Kjr3YC8ViNbseA]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.I3Kjr3YC8ViNbseA]{Fear}",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Hampered",
 			"icon": "modules/condition-lab/icons/paralyzed.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.Np1orhugJRd5dYOH]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.Np1orhugJRd5dYOH]{Hampered}",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Helpless",
 			"icon": "icons/svg/falling.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.KYTRu85eQw1DZKEp]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.KYTRu85eQw1DZKEp]{Helpless}",
 			"referenceType": "compendium.journalEntry",
 			"options": {
 				"overlay": true
@@ -37,25 +37,25 @@
 		{
 			"name": "Stuck",
 			"icon": "icons/svg/net.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.2Bv4szjE4dk8Rmqx]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.2Bv4szjE4dk8Rmqx]{Stuck}",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Stunned",
 			"icon": "icons/svg/lightning.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.COrwSqgQcw46Athr]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.COrwSqgQcw46Athr]{Stunned}",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Vulnerable",
 			"icon": "modules/condition-lab/icons/incapacitated.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.OHt8sh5UnEJF635R]",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.OHt8sh5UnEJF635R]{Vulnerable}",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Weakened",
 			"icon": "icons/svg/blood.svg",
-			"referenceId": "@Compendium[condition-lab.conditionsarchmage.OdPEQ7tKjzFybU0K",
+			"referenceId": "@UUID[Compendium.condition-lab.conditionsarchmage.JournalEntry.OdPEQ7tKjzFybU0K]{Weakened}",
 			"referenceType": "compendium.journalEntry"
 		}
 	]

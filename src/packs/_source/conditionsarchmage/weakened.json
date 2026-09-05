@@ -1,0 +1,40 @@
+{
+	"_id": "OdPEQ7tKjzFybU0K",
+	"name": "Weakened",
+	"pages": [
+		{
+			"_id": "clWeakenedPage01",
+			"name": "Weakened",
+			"type": "text",
+			"title": {
+				"show": false,
+				"level": 1
+			},
+			"image": {},
+			"text": {
+				"format": 1,
+				"content": "<p>You take a –4 penalty to attacks and to defenses.</p>",
+				"markdown": ""
+			},
+			"video": {
+				"controls": true,
+				"volume": 0.5
+			},
+			"src": null,
+			"system": {},
+			"sort": 0,
+			"ownership": {
+				"default": -1
+			},
+			"flags": {},
+			"_key": "!journal.pages!OdPEQ7tKjzFybU0K.clWeakenedPage01"
+		}
+	],
+	"folder": null,
+	"sort": 0,
+	"ownership": {
+		"default": 0
+	},
+	"flags": {},
+	"_key": "!journal!OdPEQ7tKjzFybU0K"
+}

@@ -65,7 +65,7 @@
 			"name": "conditionsarchmage",
 			"label": "Conditions",
 			"system": "archmage",
-			"path": "packs/conditionsarchmage.db",
+			"path": "packs/conditionsarchmage",
 			"type": "JournalEntry",
 			"ownership": {
 				"PLAYER": "LIMITED",
