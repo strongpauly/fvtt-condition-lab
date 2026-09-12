@@ -86,33 +86,37 @@ Hooks.on("init", () => {
 			"OVERRIDE"
 		);
 
-		// Foundry v14.364: ActiveEffect#toObject() re-emits a back-compat top-level `changes`
-		// array alongside `system.changes`. When that serialized data is fed back through
-		// document creation — e.g. the token HUD's toggleStatusEffect does
-		// `create(fromStatusEffect(id).toObject())`, and the data is sent to the server — the
-		// legacy changes→system.changes migration re-runs and blanks every non-numeric change
-		// value (macro names, hex colours, etc.). `system.changes` is authoritative, so strip the
-		// redundant top-level `changes` from toObject() output to keep the serialized/transmitted
-		// data clean. (Also guard construction directly, for data supplied with both shapes.)
-		const stripLegacyChanges = (data) => {
-			if (data && Array.isArray(data.changes) && Array.isArray(data.system?.changes)) {
-				delete data.changes;
-			}
-			return data;
-		};
+		// Foundry v14.364+: ActiveEffect source data carries a non-enumerable back-compat
+		// `changes` accessor aliasing `system.changes`, added by BaseActiveEffect.shimData and
+		// re-added by every toObject() call. BaseActiveEffect.migrateData only tests
+		// `Array.isArray(source.changes)`, so that accessor makes already-migrated data look
+		// legacy: the migration re-runs and passes every string change value through JSON.parse,
+		// blanking macro names, hex colours, etc. It bites any `create(effect.toObject())`
+		// round-trip — e.g. the token HUD's toggleStatusEffect — because ClientDatabaseBackend
+		// cleans (and so migrates) the caller's data before constructing the document.
+		//
+		// Hide the accessor for the duration of migrateData so the legacy branch is skipped, then
+		// put it back. Stored legacy data always has `changes` as a plain own value property,
+		// never an accessor, so genuine migrations are untouched — and the accessor has to
+		// survive, because sheets render the changes tab from `source.changes` (core's
+		// ActiveEffectConfig#_preparePartContext, and any system sheet that reassigns
+		// `context.source` to its own toObject() copy, such as Shadowrun 5e's).
 		libWrapper.register(
 			"condition-lab",
-			"CONFIG.ActiveEffect.documentClass.prototype.toObject",
-			function (wrapped, ...args) {
-				return stripLegacyChanges(wrapped(...args));
-			},
-			"WRAPPER"
-		);
-		libWrapper.register(
-			"condition-lab",
-			"CONFIG.ActiveEffect.documentClass.prototype._initializeSource",
-			function (wrapped, data, options) {
-				return wrapped(stripLegacyChanges(data), options);
+			"CONFIG.ActiveEffect.documentClass.migrateData",
+			function (wrapped, source, options) {
+				const shim = source ? Object.getOwnPropertyDescriptor(source, "changes") : null;
+				const isShim = shim?.get && shim.configurable && Array.isArray(source.system?.changes);
+				if (!isShim) return wrapped(source, options);
+
+				delete source.changes;
+				let migrated;
+				try {
+					migrated = wrapped(source, options);
+				} finally {
+					Object.defineProperty(migrated ?? source, "changes", shim);
+				}
+				return migrated;
 			},
 			"WRAPPER"
 		);
