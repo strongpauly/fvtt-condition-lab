@@ -1,15 +1,15 @@
 /* CONDITIONS CHAT MESSAGE */
-ul.chat-message.condition-list {
+ul.condition-list {
 	list-style-type: none;
 	padding: 0;
 }
 
-ul.chat-message.condition-list li {
+ul.condition-list li {
 	align-items: center;
 }
 
-.chat-message.condition-list .remove-row,
-.chat-message.condition-list .undo-remove {
+.condition-list .remove-row,
+.condition-list .undo-remove {
 	flex: 0 0 20px;
 }
 
@@ -70,7 +70,7 @@ a.add-temporary {
 /*                 CONDITION LAB                */
 /* -------------------------------------------- */
 
-#cub-condition-lab{
+#cub-condition-lab {
 	min-height: 510px;
 	min-width: 640px;
 }
@@ -219,7 +219,7 @@ a.add-temporary {
 
 .condition-lab footer {
 	margin: 1rem;
-    flex: 0;
+	flex: 0;
 }
 
 .condition-lab a.macro {
