@@ -363,14 +363,26 @@ export class EnhancedConditions {
 		}
 
 		const outputChatSetting = game.settings.get("condition-lab", "conditionsOutputToChat");
-		conditionMap = conditionMap.filter((c) => c.name && c.id);
+		conditionMap = conditionMap.filter((c) => c.name);
+		const existingIds = conditionMap.map((c) => c.id).filter(Boolean);
 
 		// Iterate through the map validating/preparing the data
 		for (const condition of conditionMap) {
+			// Rows from older exports carry no id; give them one so they survive saving and can be
+			// matched back to the Active Effects they create
+			if (!condition.id) {
+				condition.id = Sidekick.createId(existingIds);
+				existingIds.push(condition.id);
+			}
 			condition.options = condition.options || {};
 			if (condition.options.outputChat === undefined) condition.options.outputChat = outputChatSetting;
 			// Normalise the legacy `icon` property to `img` used by status effects
 			condition.img ??= condition.icon;
+			// Normalise a legacy `referenceId` enricher to the bare UUID held in `reference`
+			if (!condition.reference && condition.referenceId) {
+				const uuid = condition.referenceId.match(/^@UUID\[([^\]]+)\]/)?.[1];
+				if (uuid) condition.reference = uuid;
+			}
 			// Normalise legacy ActiveEffect changes to the v14 `system.changes` schema
 			EnhancedConditions._migrateActiveEffectChanges(condition.activeEffect);
 			preparedMap.push(condition);

@@ -162,17 +162,14 @@ Hooks.on("ready", async () => {
 
 	const mapType = game.settings.get("condition-lab", "conditionMapType");
 
-	// If there's no defaultMaps or defaultMaps doesn't include game system, check storage then set appropriately
-	if (
-		game.user.isGM
-		&& (
-			!defaultMaps
-			|| Object.keys(defaultMaps).length === 0
-			|| !Object.keys(defaultMaps).includes(game.system.id)
-		)
-	) {
-		defaultMaps = await EnhancedConditions._loadDefaultMaps();
-		game.settings.set("condition-lab", "defaultConditionMaps", defaultMaps);
+	// Refresh the cached module-provided default maps from the bundled files, so a map that a
+	// module release has changed or removed doesn't linger in the world setting
+	if (game.user.isGM) {
+		const bundledMaps = await EnhancedConditions._loadDefaultMaps();
+		if (!foundry.utils.objectsEqual(defaultMaps ?? {}, bundledMaps)) {
+			defaultMaps = bundledMaps;
+			await game.settings.set("condition-lab", "defaultConditionMaps", defaultMaps);
+		}
 	}
 
 	// If map type is not set and a default map exists for the system, set maptype to default
@@ -237,6 +234,17 @@ Hooks.on("createActiveEffect", (effect, options, userId) => {
 Hooks.on("deleteActiveEffect", (effect, options, userId) => {
 	if (!game.user.isGM || game.userId !== userId) return;
 	EnhancedConditions._processActiveEffectChange(effect, "delete");
+});
+
+// Foundry v14 marks an Active Effect as expired at the end of its duration and leaves it on the
+// actor as an inactive effect, which the token HUD still shows as applied. A condition that has
+// run its course is removed instead, which also fires the usual removal output and macros.
+Hooks.on("updateActiveEffect", (effect, changes, options, userId) => {
+	if (!game.users.activeGM?.isSelf) return;
+	if (!game.settings.get("condition-lab", "deleteExpiredConditions")) return;
+	if (foundry.utils.getProperty(changes, "duration.expired") !== true) return;
+	if (!effect.getFlag("condition-lab", "conditionId")) return;
+	effect.delete();
 });
 
 /* ------------------ Combat ------------------ */

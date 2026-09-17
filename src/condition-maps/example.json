@@ -2,32 +2,32 @@
 	"system": "example",
 	"map": [
 		{
+			"id": "exampleCondition1",
 			"name": "Condition 1 Name",
-			"icon": "./path/to/icon",
-			"referenceId": "@JournalEntry[anIdofSoMeKinD]",
-			"referenceType": "journalEntry",
+			"img": "path/to/icon.svg",
+			"reference": "JournalEntry.anIdofSoMeKinD",
 			"options": {
 				"overlay": true,
 				"removeOthers": true
 			}
 		},
 		{
+			"id": "exampleCondition2",
 			"name": "Condition 2 Name",
-			"icon": "./path/to/icon",
-			"referenceId": "@Item[anIdofSoMeKinD]",
-			"referenceType": "item"
+			"img": "path/to/icon.svg",
+			"reference": "Item.anIdofSoMeKinD"
 		},
 		{
+			"id": "exampleCondition3",
 			"name": "Condition 3 Name",
-			"icon": "./path/to/icon",
-			"referenceId": "@Compendium[example.conditions.anIdofSoMeKinD]",
-			"referenceType": "compendium.journalEntry"
+			"img": "path/to/icon.svg",
+			"reference": "Compendium.example.conditions.JournalEntry.anIdofSoMeKinD"
 		},
 		{
+			"id": "exampleCondition4",
 			"name": "Condition 4 Name",
-			"icon": "./path/to/icon",
-			"referenceId": "@Compendium[example.features.anIdofSoMeKinD]",
-			"referenceType": "compendium.item"
+			"img": "path/to/icon.svg",
+			"reference": "Compendium.example.features.Item.anIdofSoMeKinD"
 		}
 	]
 }

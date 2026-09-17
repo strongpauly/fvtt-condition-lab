@@ -56,6 +56,15 @@ export function registerSettings() {
 		}
 	});
 
+	game.settings.register("condition-lab", "deleteExpiredConditions", {
+		name: "CLT.SETTINGS.EnhancedConditions.DeleteExpiredConditionsN",
+		hint: "CLT.SETTINGS.EnhancedConditions.DeleteExpiredConditionsH",
+		scope: "world",
+		type: Boolean,
+		config: true,
+		default: true
+	});
+
 	game.settings.register("condition-lab", "forceAlphabeticalSort", {
 		name: "CLT.SETTINGS.EnhancedConditions.ForceAlphabeticalSortN",
 		hint: "CLT.SETTINGS.EnhancedConditions.ForceAlphabeticalSortH",

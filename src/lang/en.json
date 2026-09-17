@@ -164,6 +164,8 @@
 				"DefaultMapsH": "Module-provided maps of conditions to icons",
 				"RemoveDefaultEffectsN": "Remove Default Status Effects",
 				"RemoveDefaultEffectsH": "Remove existing status effect icons from token HUD",
+				"DeleteExpiredConditionsN": "Remove Expired Conditions",
+				"DeleteExpiredConditionsH": "When Foundry marks a condition's Active Effect as expired at the end of its duration, delete the effect. Otherwise it stays on the actor as an inactive effect, which the token HUD still shows as applied.",
 				"ForceAlphabeticalSortN": "Force Alphabetical Sort",
 				"ForceAlphabeticalSortH": "Sort the status effects in the token HUD alphabetically by name, including any default status effects that haven't been removed. Turn this off to have the token HUD follow the order the conditions are arranged in the Condition Lab instead.",
 				"DefaultOutputChatN": "Output Default Conditions to Chat",
