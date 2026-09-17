@@ -6,6 +6,12 @@
 2. The Default/Inferred Condition Lab Mappings for game systems may not correctly import all data. Importing the map from the CUB Condition Maps folder imports correctly.
 3. PF2e is not currently supported by Enhanced Conditions due to the customisation of the effects framework implemented by the system.
 
+## [3.0.8] - 2026-09-17
+- Added a "Remove Expired Conditions" setting, on by default. When Foundry v14 marks a condition's Active Effect as expired at the end of its duration, the effect is now deleted instead of being left on the actor as an inactive effect that the token HUD still shows as applied. Deleting it also fires the condition's usual removal chat output and macros.
+- Removed the bundled dnd5e condition map. Its entries carried no ids, so they were re-keyed randomly on every load and never lined up with dnd5e's own status effects, and its icons and condition list had fallen behind dnd5e 6.x. dnd5e worlds now use the map inferred from the system's status effects, as other systems without a bundled map do, and "Restore Defaults" in the Condition Lab does the same. The cached copy of a bundled map is now refreshed from the module's files on load, so the removed map doesn't linger.
+- Importing a map whose conditions have no ids, such as an older export, now assigns them ids instead of dropping the rows, and a legacy `@UUID[...]` reference is carried into the condition's rules reference.
+- Updated the example condition map to the current map format.
+
 ## [3.0.7] - 2026-09-05
 - The bundled 13th Age conditions compendium is now a LevelDB pack, so it loads on Foundry v11 and later. Its entries have also been brought up to the current Journal Entry format — the rules text lives on a journal page instead of the removed `content` field, so the 13th Age map's rules links work again. (#2)
 

@@ -297,17 +297,15 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 	 * @param {boolean} options.clearCache
 	 */
 	async _restoreDefaults({ clearCache = false } = {}) {
-		const system = this.system;
 		let defaultMaps = game.settings.get("condition-lab", "defaultConditionMaps");
 
 		if (clearCache) {
 			defaultMaps = await EnhancedConditions._loadDefaultMaps();
 			game.settings.set("condition-lab", "defaultConditionMaps", defaultMaps);
 		}
-		const tempMap = this.mapType !== "other" && defaultMaps && defaultMaps[system] ? defaultMaps[system] : [];
-
-		// If the mapType is other then the map should be empty, otherwise it's the default map for the system
-		this.map = tempMap;
+		// Other/imported maps start empty; otherwise use the system's bundled map, or the one
+		// inferred from the system's status effects when there is no bundled map
+		this.map = this.mapType === "other" ? [] : EnhancedConditions.getDefaultMap(defaultMaps ?? {});
 		this.render();
 	}
 

@@ -24,14 +24,15 @@ Open it from **Game Settings → Configure Settings → Condition Lab**, or bind
 ## Building the map
 
 - Add, rename, re-icon, reorder and delete conditions. The order you save them in is the order the token HUD shows them in (unless Force Alphabetical Sort is on).
-- Start from your system's own conditions — the map is inferred from them when the module doesn't bundle one — or from a bundled map. Maps ship for D&D 5e, Pathfinder 1e, 13th Age, Cyberpunk Red and Ironclaw 2e. **Restore Defaults** takes you back to the system map at any point.
+- Start from your system's own conditions — the map is inferred from them when the module doesn't bundle one, as it is for D&D 5e — or from a bundled map. Maps ship for Pathfinder 1e, 13th Age, Cyberpunk Red and Ironclaw 2e. **Restore Defaults** takes you back to the system map at any point.
 - Link a condition to a Journal Entry, Item or compendium entry by dropping it onto the row, so anyone can click through to the rules from the chat card.
-- Import and export the whole map as JSON to share it or carry it between worlds.
+- Import and export the whole map as JSON to share it or carry it between worlds. Older exports whose conditions have no ids are given ids on import.
 - Filter the list by name and sort it alphabetically while you work.
 
 ## Making conditions do something
 
 - Attach an **Active Effect** to a condition so applying it actually changes the actor — its own changes, duration and description, edited in Foundry's normal effect editor.
+- A condition with a duration is removed from the actor when that duration runs out (**Remove Expired Conditions**, on by default), announcing the removal and running the condition's remove macro as usual. Turn the setting off to have Foundry leave the expired effect on the actor as an inactive effect instead.
 - Run a **macro** when the condition is applied, and another when it is removed.
 - Per-condition options:
   - **Overlay** — apply the icon over the whole token instead of as a small status icon.
